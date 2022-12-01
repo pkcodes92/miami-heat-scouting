@@ -39,5 +39,12 @@ namespace API.Entities
         public string WingSource { get; set; } = null!;
         public string BodyFatSource { get; set; } = null!;
         public string StandingReachSource { get; set; } = null!;
+        public string CourtRunTimeSource { get; set; } = null!;
+        public string VerticalJumpNoStepSource { get; set; } = null!;
+        public string VerticalJumpMaxSource { get; set; } = null!;
+        public string HandWHSource { get; set; } = null!;
+        public string Hand { get; set; } = null!;
+        public bool IsCustomData { get; set; }
+        public string HandednessSource { get; set; } = null!;
     }
 }
