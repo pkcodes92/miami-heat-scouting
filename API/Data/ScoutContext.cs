@@ -1,19 +1,36 @@
-using Microsoft.EntityFrameworkCore;
-using API.Entities;
+// <copyright file="ScoutContext.cs" company="Miami Heat">
+// Copyright (c) Miami Heat. All rights reserved.
+// </copyright>
 
 namespace API.Data
 {
+    using API.Entities;
+    using Microsoft.EntityFrameworkCore;
+
+    /// <summary>
+    /// This class represents the database context, connecting to the database.
+    /// </summary>
     public class ScoutContext : DbContext
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ScoutContext"/> class.
+        /// </summary>
         public ScoutContext()
         {
         }
 
-        public ScoutContext(DbContextOptions<ScoutContext> options) 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ScoutContext"/> class.
+        /// </summary>
+        /// <param name="options">The DB context options.</param>
+        public ScoutContext(DbContextOptions<ScoutContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<League> Leagues {get;set;} = null!;
+        /// <summary>
+        /// Gets or sets the league entities.
+        /// </summary>
+        public virtual DbSet<League> Leagues { get; set; } = null!;
     }
 }
