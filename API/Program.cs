@@ -1,5 +1,7 @@
+using API.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,9 @@ builder.Services.AddSwaggerGen(c => {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Miami Heat Scouting API", Version = "v1"});
 });
 builder.Services.AddHealthChecks();
+builder.Services.AddDbContext<ScoutContext>(options => {
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:DbConnection"]);
+});
 
 var app = builder.Build();
 
