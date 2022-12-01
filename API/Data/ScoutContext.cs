@@ -32,5 +32,15 @@ namespace API.Data
         /// Gets or sets the league entities.
         /// </summary>
         public virtual DbSet<League> Leagues { get; set; } = null!;
+
+        /// <summary>
+        /// Gets or sets the team player entities.
+        /// </summary>
+        public virtual DbSet<TeamPlayer> TeamPlayers { get; set; } = null!;
+
+        /// <summary>
+        /// Gets or sets the team entities.
+        /// </summary>
+        public virtual DbSet<Team> Teams { get; set; } = null!;
     }
 }
