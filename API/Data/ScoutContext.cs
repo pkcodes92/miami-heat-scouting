@@ -1,16 +1,19 @@
 using Microsoft.EntityFrameworkCore;
+using API.Entities;
 
 namespace API.Data
 {
     public class ScoutContext : DbContext
     {
-        /// <summary>
-        /// This is the default constructor for the Scout context class.
-        /// </summary>
-        /// <param name="options">SQL Server DB Options.</param>
-        /// <returns>An instance for the database connection.</returns>
-        public ScoutContext(DbContextOptions options) : base(options)
+        public ScoutContext()
         {
         }
+
+        public ScoutContext(DbContextOptions<ScoutContext> options) 
+            : base(options)
+        {
+        }
+
+        public virtual DbSet<League> Leagues {get;set;} = null!;
     }
 }
