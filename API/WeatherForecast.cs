@@ -1,12 +1,32 @@
-namespace API;
+// <copyright file="WeatherForecast.cs" company="Miami Heat">
+// Copyright (c) Miami Heat. All rights reserved.
+// </copyright>
 
-public class WeatherForecast
+namespace API
 {
-    public DateTime Date { get; set; }
+    /// <summary>
+    /// This class models a sample Weather forecast model.
+    /// </summary>
+    public class WeatherForecast
+    {
+        /// <summary>
+        /// Gets or sets the date.
+        /// </summary>
+        public DateTime Date { get; set; }
 
-    public int TemperatureC { get; set; }
+        /// <summary>
+        /// Gets or sets the temperature in degrees Centigrade.
+        /// </summary>
+        public int TemperatureC { get; set; }
 
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        /// <summary>
+        /// Gets the temperature in degrees Fahrenheit.
+        /// </summary>
+        public int TemperatureF => 32 + (int)(this.TemperatureC / 0.5556);
 
-    public string? Summary { get; set; }
+        /// <summary>
+        /// Gets or sets the summary.
+        /// </summary>
+        public string? Summary { get; set; }
+    }
 }
