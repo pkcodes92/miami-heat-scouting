@@ -10,7 +10,7 @@ namespace API.Data
     /// <summary>
     /// This class represents the database context, connecting to the database.
     /// </summary>
-    public class ScoutContext : DbContext
+    public partial class ScoutContext : DbContext
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ScoutContext"/> class.
@@ -42,5 +42,34 @@ namespace API.Data
         /// Gets or sets the team entities.
         /// </summary>
         public virtual DbSet<Team> Teams { get; set; } = null!;
+
+        /// <summary>
+        /// Gets or sets the player entities.
+        /// </summary>
+        public virtual DbSet<Player> Players { get; set; } = null!;
+
+        /// <summary>
+        /// This method will be able to bind the database schema accordingly.
+        /// </summary>
+        /// <param name="modelBuilder">The model builder class.</param>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+            this.OnModelCreatingPartial(modelBuilder);
+        }
+
+        /// <summary>
+        /// This method will be executed when the configurations are being made.
+        /// </summary>
+        /// <param name="optionsBuilder">The necessary DB Context options.</param>
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                // do nothing??
+            }
+        }
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
