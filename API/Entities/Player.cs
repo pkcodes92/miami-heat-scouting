@@ -7,7 +7,7 @@ namespace API.Entities
     /// <summary>
     /// This file represents the player entity.
     /// </summary>
-    public class Player
+    public partial class Player
     {
         /// <summary>
         /// Gets or sets the primary key of the player entity.

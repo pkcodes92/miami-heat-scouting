@@ -7,7 +7,7 @@ namespace API.Entities
     /// <summary>
     /// This class represents the TeamPlayer table.
     /// </summary>
-    public class TeamPlayer
+    public partial class TeamPlayer
     {
         /// <summary>
         /// Gets or sets the player key.

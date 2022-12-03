@@ -7,7 +7,7 @@ namespace API.Entities
     /// <summary>
     /// This class represents the team entity.
     /// </summary>
-    public class Team
+    public partial class Team
     {
         /// <summary>
         /// Gets or sets the primary key for the team.

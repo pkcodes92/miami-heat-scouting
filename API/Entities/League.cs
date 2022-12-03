@@ -7,7 +7,7 @@ namespace API.Entities
     /// <summary>
     /// This class represents the league.
     /// </summary>
-    public class League
+    public partial class League
     {
         /// <summary>
         /// Gets or sets the primary key for the league entity.

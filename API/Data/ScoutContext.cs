@@ -6,7 +6,6 @@ namespace API.Data
 {
     using API.Entities;
     using Microsoft.EntityFrameworkCore;
-    using System.Reflection.Metadata;
 
     /// <summary>
     /// This class represents the database context, connecting to the database.
