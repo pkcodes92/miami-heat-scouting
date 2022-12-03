@@ -56,6 +56,7 @@ namespace API
             });
 
             services.AddHealthChecks();
+            services.AddApplicationInsightsTelemetry();
         }
 
         /// <summary>
