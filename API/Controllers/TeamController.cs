@@ -51,7 +51,43 @@ namespace API.Controllers
                     Conference = x.Conference,
                     CurrentNBATeamFlag = x.CurrentNBATeamFlag,
                     LeagueKey = x.LeagueKey,
-                    LeagueKeyDomestic = x.LeagueKeyDomestic,
+                    SubConference = x.SubConference,
+                    TeamCity = x.TeamCity,
+                    TeamCountry = x.TeamCountry,
+                    TeamName = x.TeamName,
+                    TeamNickname = x.TeamNickname,
+                    URLPhoto = x.URLPhoto,
+                }).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                this.telemetryClient.TrackTrace($"Error occurred while getting the active teams: {ex.Message}");
+                teams = null!;
+            }
+
+            return teams;
+        }
+
+        /// <summary>
+        /// This method gets all the teams accordingly.
+        /// </summary>
+        /// <returns>Returns all the teams from the database.</returns>
+        [HttpGet]
+        [Route("GetAllTeams")]
+        public async Task<ActionResult<List<Team>>> GetAllTeamsAsync()
+        {
+            List<Team> teams;
+
+            try
+            {
+                teams = await this.scoutContext.Teams.Select(x => new Team
+                {
+                    TeamKey = x.TeamKey,
+                    ArenaKey = x.ArenaKey,
+                    CoachName = x.CoachName,
+                    Conference = x.Conference,
+                    CurrentNBATeamFlag = x.CurrentNBATeamFlag,
+                    LeagueKey = x.LeagueKey,
                     SubConference = x.SubConference,
                     TeamCity = x.TeamCity,
                     TeamCountry = x.TeamCountry,
