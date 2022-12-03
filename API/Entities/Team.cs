@@ -37,32 +37,32 @@ namespace API.Entities
         /// <summary>
         /// Gets or sets the team nickname.
         /// </summary>
-        public string? TeamNickname { get; set; }
+        public string TeamNickname { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the conference.
         /// </summary>
-        public string? Conference { get; set; }
+        public string Conference { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the sub-conference for the team.
         /// </summary>
-        public string? SubConference { get; set; }
+        public string SubConference { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the city where the team plays in.
         /// </summary>
-        public string? TeamCity { get; set; }
+        public string TeamCity { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the country of the team.
         /// </summary>
-        public string? TeamCountry { get; set; }
+        public string TeamCountry { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the name of the coach.
         /// </summary>
-        public string? CoachName { get; set; }
+        public string CoachName { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the URL of the photo.
