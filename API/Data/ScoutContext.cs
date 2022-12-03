@@ -56,9 +56,37 @@ namespace API.Data
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
-            modelBuilder.Entity<League>(entity => 
+            modelBuilder.Entity<League>(entity =>
             {
                 entity.ToTable("League", "dbo");
+
+                entity.HasKey(e => e.LeagueKey).IsClustered(true).HasName("PK_League");
+                entity.Property(e => e.LeagueName).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Country).HasMaxLength(100);
+                entity.Property(e => e.ActiveSource).HasDefaultValueSql("((1))");
+                entity.Property(e => e.LeagueGroupKey).HasColumnType("int");
+                entity.Property(e => e.LeagueCustomGroupKey).HasColumnType("int");
+                entity.Property(e => e.SearchDisplayFlag).HasDefaultValueSql("((1))");
+            });
+
+            modelBuilder.Entity<Team>(entity =>
+            {
+                entity.ToTable("Team", "dbo");
+
+                entity.HasKey(e => e.TeamKey).HasName("PK_Team").IsClustered(true);
+                entity.HasKey(e => e.LeagueKeyDomestic).HasName("FK_Team_LeagueDomestic");
+
+                entity.Property(e => e.ArenaKey).HasColumnType("int");
+                entity.Property(e => e.TeamName).IsRequired().HasMaxLength(50);
+                entity.Property(e => e.TeamNickname).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Conference).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.SubConference).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.TeamCity).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.TeamCountry).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.CoachName).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.URLPhoto).IsRequired().HasMaxLength(250);
+                entity.Property(e => e.CurrentNBATeamFlag).HasDefaultValueSql("((0))");
+                entity.Property(e => e.LeagueKeyDomestic).HasColumnType("int").HasColumnName("LeageKey_Domestic");
             });
 
             this.OnModelCreatingPartial(modelBuilder);
