@@ -6,6 +6,7 @@ namespace API.Controllers
 {
     using API.Data;
     using API.Entities;
+    using API.Services.Interfaces;
     using Microsoft.ApplicationInsights;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
@@ -18,17 +19,17 @@ namespace API.Controllers
     public class TeamController : ControllerBase
     {
         private readonly TelemetryClient telemetryClient;
-        private readonly ScoutContext scoutContext;
+        private readonly ITeamsService teamsService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TeamController"/> class.
         /// </summary>
         /// <param name="telemetryClient">Microsoft Application Insights injection.</param>
-        /// <param name="scoutContext">The database layer being injected.</param>
-        public TeamController(TelemetryClient telemetryClient, ScoutContext scoutContext)
+        /// <param name="teamsService">The teams entity data service.</param>
+        public TeamController(TelemetryClient telemetryClient, ITeamsService teamsService)
         {
             this.telemetryClient = telemetryClient;
-            this.scoutContext = scoutContext;
+            this.teamsService = teamsService;
         }
 
         /// <summary>
@@ -43,25 +44,11 @@ namespace API.Controllers
 
             try
             {
-                teams = await this.scoutContext.Teams.Where(x => x.CurrentNBATeamFlag == true).Select(x => new Team
-                {
-                    TeamKey = x.TeamKey,
-                    ArenaKey = x.ArenaKey,
-                    CoachName = x.CoachName,
-                    Conference = x.Conference,
-                    CurrentNBATeamFlag = x.CurrentNBATeamFlag,
-                    LeagueKey = x.LeagueKey,
-                    SubConference = x.SubConference,
-                    TeamCity = x.TeamCity,
-                    TeamCountry = x.TeamCountry,
-                    TeamName = x.TeamName,
-                    TeamNickname = x.TeamNickname,
-                    URLPhoto = x.URLPhoto,
-                }).ToListAsync();
+                teams = await this.teamsService.GetActiveTeamsAsync();
             }
             catch (Exception ex)
             {
-                this.telemetryClient.TrackTrace($"Error occurred while getting the active teams: {ex.Message}");
+                this.telemetryClient.TrackException(ex);
                 teams = null!;
             }
 
@@ -80,25 +67,11 @@ namespace API.Controllers
 
             try
             {
-                teams = await this.scoutContext.Teams.Select(x => new Team
-                {
-                    TeamKey = x.TeamKey,
-                    ArenaKey = x.ArenaKey,
-                    CoachName = x.CoachName,
-                    Conference = x.Conference,
-                    CurrentNBATeamFlag = x.CurrentNBATeamFlag,
-                    LeagueKey = x.LeagueKey,
-                    SubConference = x.SubConference,
-                    TeamCity = x.TeamCity,
-                    TeamCountry = x.TeamCountry,
-                    TeamName = x.TeamName,
-                    TeamNickname = x.TeamNickname,
-                    URLPhoto = x.URLPhoto,
-                }).ToListAsync();
+                teams = await this.teamsService.GetAllTeamsAsync();
             }
             catch (Exception ex)
             {
-                this.telemetryClient.TrackTrace($"Error occurred while getting the active teams: {ex.Message}");
+                this.telemetryClient.TrackException(ex);
                 teams = null!;
             }
 
