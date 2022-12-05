@@ -28,5 +28,10 @@ namespace API.Entities
         /// Gets or sets the date/time the record was created.
         /// </summary>
         public DateTime Created { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether or not the scout is active.
+        /// </summary>
+        public bool IsActive { get; set; }
     }
 }
