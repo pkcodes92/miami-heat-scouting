@@ -4,7 +4,7 @@
 
 namespace API.Data
 {
-    using API.Entities;
+    using API.Data.Entities;
     using Microsoft.EntityFrameworkCore;
 
     /// <summary>

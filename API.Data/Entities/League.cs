@@ -2,7 +2,7 @@
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 
-namespace API.Entities
+namespace API.Data.Entities
 {
     /// <summary>
     /// This class represents the league.

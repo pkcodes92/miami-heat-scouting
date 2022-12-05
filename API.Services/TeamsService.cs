@@ -5,7 +5,7 @@
 namespace API.Services
 {
     using API.Data;
-    using API.Entities;
+    using API.Data.Entities;
     using API.Services.Interfaces;
     using Microsoft.ApplicationInsights;
     using Microsoft.EntityFrameworkCore;
