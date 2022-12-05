@@ -5,6 +5,8 @@
 namespace API
 {
     using API.Data;
+    using API.Services;
+    using API.Services.Interfaces;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
@@ -57,6 +59,8 @@ namespace API
 
             services.AddHealthChecks();
             services.AddApplicationInsightsTelemetry();
+
+            services.AddTransient<ITeamsService, TeamsService>();
         }
 
         /// <summary>
