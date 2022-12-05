@@ -4,12 +4,10 @@
 
 namespace API.Controllers
 {
-    using API.Data;
-    using API.Entities;
+    using API.Data.Entities;
     using API.Services.Interfaces;
     using Microsoft.ApplicationInsights;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
 
     /// <summary>
     /// This class represents all of the CRUD operations to be performed with the <see cref="Team"/> model.

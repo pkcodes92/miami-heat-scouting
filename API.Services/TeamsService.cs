@@ -1,5 +1,15 @@
-﻿namespace API.Services
+﻿// <copyright file="TeamsService.cs" company="Miami Heat">
+// Copyright (c) Miami Heat. All rights reserved.
+// </copyright>
+
+namespace API.Services
 {
+    using API.Data;
+    using API.Data.Entities;
+    using API.Services.Interfaces;
+    using Microsoft.ApplicationInsights;
+    using Microsoft.EntityFrameworkCore;
+
     /// <summary>
     /// This class implements the methods defined in <see cref="ITeamsService"/>.
     /// </summary>
