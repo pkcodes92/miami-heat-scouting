@@ -49,6 +49,16 @@ namespace API.Data
         public virtual DbSet<Player> Players { get; set; } = null!;
 
         /// <summary>
+        /// Gets or sets the scout entities.
+        /// </summary>
+        public virtual DbSet<Scout> Scouts { get; set; } = null!;
+
+        /// <summary>
+        /// Gets or sets the scouting report entities.
+        /// </summary>
+        public virtual DbSet<ScoutingReport> ScoutingReports { get; set; } = null!;
+
+        /// <summary>
         /// This method will be able to bind the database schema accordingly.
         /// </summary>
         /// <param name="modelBuilder">The model builder class.</param>
@@ -145,6 +155,34 @@ namespace API.Data
                 entity.HasKey(e => e.PlayerKey).HasName("PK_TeamPlayer");
                 entity.Property(e => e.ActiveTeamFlag).HasColumnType("bit").HasColumnName("ActiveTeamFlg");
                 entity.Property(e => e.InsertDateTime).HasColumnType("datetime").HasColumnName("dwh_insert_datetime");
+            });
+
+            modelBuilder.Entity<Scout>(entity =>
+            {
+                entity.ToTable("Scout", "dbo");
+
+                entity.HasKey(e => e.ScoutKey).HasName("PK_Scout");
+                entity.Property(e => e.ScoutFirstName).IsRequired();
+                entity.Property(e => e.ScoutLastName).IsRequired();
+                entity.Property(e => e.Created).HasColumnType("datetime").HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.IsActive).HasColumnType("bit").HasDefaultValueSql("((1))");
+            });
+
+            modelBuilder.Entity<ScoutingReport>(entity =>
+            {
+                entity.ToTable("ScoutingReport", "dbo");
+
+                entity.HasKey(e => e.ScoutingReportKey).HasName("PK_ScoutingReport");
+                entity.Property(e => e.ScoutKey).HasColumnType("int");
+                entity.Property(e => e.PlayerKey).HasColumnType("int");
+                entity.Property(e => e.TeamKey).HasColumnType("int");
+                entity.Property(e => e.Defense).HasColumnType("int").HasColumnName("DefenseRating");
+                entity.Property(e => e.Rebound).HasColumnType("int").HasColumnName("ReboundRating");
+                entity.Property(e => e.Shooting).HasColumnType("int").HasColumnName("ShootingRating");
+                entity.Property(e => e.Assist).HasColumnType("int").HasColumnName("AssistRating");
+                entity.Property(e => e.Comments).HasColumnType("varchar");
+                entity.Property(e => e.Created).HasColumnType("datetime").HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.IsCurrent).HasColumnType("bit").HasDefaultValueSql("((1))");
             });
 
             this.OnModelCreatingPartial(modelBuilder);
