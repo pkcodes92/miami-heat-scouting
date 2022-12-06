@@ -35,7 +35,7 @@ namespace API.Services
         /// </summary>
         /// <param name="newScoutingReport">The incoming scouting report.</param>
         /// <returns>A unit of execution that contains a new scouting report.</returns>
-        public async Task<int> InsertScoutingReport(IncomingScoutingReport newScoutingReport)
+        public async Task<int> InsertScoutingReportAsync(IncomingScoutingReport newScoutingReport)
         {
             var user = await this.scoutContext.Users.FirstOrDefaultAsync(x => x.Name == newScoutingReport.ScoutName);
 

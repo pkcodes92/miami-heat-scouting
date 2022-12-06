@@ -17,6 +17,6 @@ namespace API.Services.Interfaces
         /// </summary>
         /// <param name="newScoutingReport">A new scouting report.</param>
         /// <returns>A new scouting report being added.</returns>
-        Task<int> InsertScoutingReport(IncomingScoutingReport newScoutingReport);
+        Task<int> InsertScoutingReportAsync(IncomingScoutingReport newScoutingReport);
     }
 }
