@@ -86,14 +86,14 @@ namespace API.Data
                 entity.HasKey(e => e.TeamKey).HasName("PK_Team").IsClustered(true);
                 entity.HasKey(e => e.LeagueKeyDomestic).HasName("FK_Team_LeagueDomestic");
 
-                entity.Property(e => e.ArenaKey).HasColumnType("int");
+                entity.Property(e => e.ArenaKey).IsRequired(false).HasColumnType("int");
                 entity.Property(e => e.TeamName).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.TeamNickname).HasMaxLength(100);
-                entity.Property(e => e.Conference).HasMaxLength(100);
-                entity.Property(e => e.SubConference).HasMaxLength(100);
+                entity.Property(e => e.Conference).IsRequired(false).HasMaxLength(100);
+                entity.Property(e => e.SubConference).IsRequired(false).HasMaxLength(100);
                 entity.Property(e => e.TeamCity).HasMaxLength(100);
                 entity.Property(e => e.TeamCountry).HasMaxLength(100);
-                entity.Property(e => e.CoachName).HasMaxLength(100);
+                entity.Property(e => e.CoachName).IsRequired(false).HasMaxLength(100);
                 entity.Property(e => e.URLPhoto).HasMaxLength(250);
                 entity.Property(e => e.CurrentNBATeamFlag).HasColumnName("CurrentNBATeamFlg").HasDefaultValueSql("((0))");
                 entity.Property(e => e.LeagueKeyDomestic).HasColumnType("int").HasColumnName("LeagueKey_Domestic");
@@ -110,30 +110,30 @@ namespace API.Data
                 entity.Property(e => e.BirthDate).HasColumnType("datetime");
                 entity.Property(e => e.PositionKey).HasColumnType("int");
                 entity.Property(e => e.AgentKey).HasColumnType("int");
-                entity.Property(e => e.FreeAgentYear).HasColumnType("int");
+                entity.Property(e => e.FreeAgentYear).IsRequired(false).HasColumnType("int");
                 entity.Property(e => e.Height).HasColumnType("decimal(6, 4)");
                 entity.Property(e => e.Weight).HasColumnType("decimal(6, 2)");
                 entity.Property(e => e.YearsOfService).HasColumnType("int");
-                entity.Property(e => e.Wing).HasColumnType("decimal(6, 4)");
-                entity.Property(e => e.BodyFat).HasColumnType("decimal(5, 2)");
-                entity.Property(e => e.StandingReach).HasColumnType("decimal(6, 4)");
-                entity.Property(e => e.CourtRunTime).HasColumnType("decimal(5, 2)").HasColumnName("CourtRunTime_3_4");
-                entity.Property(e => e.VerticalJumpNoStep).HasColumnType("decimal(6, 4)");
-                entity.Property(e => e.VerticalJumpMax).HasColumnType("decimal(6, 4)");
-                entity.Property(e => e.HandWidth).HasColumnType("decimal(5, 2)");
-                entity.Property(e => e.HandLength).HasColumnType("decimal(5, 2)");
-                entity.Property(e => e.URLPhoto).IsRequired().HasMaxLength(250);
+                entity.Property(e => e.Wing).IsRequired(false).HasColumnType("decimal(6, 4)");
+                entity.Property(e => e.BodyFat).IsRequired(false).HasColumnType("decimal(5, 2)");
+                entity.Property(e => e.StandingReach).IsRequired(false).HasColumnType("decimal(6, 4)");
+                entity.Property(e => e.CourtRunTime).IsRequired(false).HasColumnType("decimal(5, 2)").HasColumnName("CourtRunTime_3_4");
+                entity.Property(e => e.VerticalJumpNoStep).IsRequired(false).HasColumnType("decimal(6, 4)");
+                entity.Property(e => e.VerticalJumpMax).IsRequired(false).HasColumnType("decimal(6, 4)");
+                entity.Property(e => e.HandWidth).IsRequired(false).HasColumnType("decimal(5, 2)");
+                entity.Property(e => e.HandLength).IsRequired(false).HasColumnType("decimal(5, 2)");
+                entity.Property(e => e.URLPhoto).IsRequired(false).HasMaxLength(250);
                 entity.Property(e => e.ActiveAnalysisFlag).HasColumnName("ActiveAnalysisFlg").HasDefaultValueSql("((0))");
                 entity.Property(e => e.LeagueCustomGroupKey).HasColumnType("int");
                 entity.Property(e => e.BboPlayerKey).HasColumnType("int");
                 entity.Property(e => e.InsertDateTime).HasColumnType("datetime").HasColumnName("dwh_insert_datetime");
                 entity.Property(e => e.UpdateDateTime).HasColumnType("datetime").HasColumnName("dwh_update_datetime");
-                entity.Property(e => e.AgentName).IsRequired().HasMaxLength(200);
-                entity.Property(e => e.AgentPhone).IsRequired().HasMaxLength(50);
-                entity.Property(e => e.CommittedTo).IsRequired().HasMaxLength(200);
-                entity.Property(e => e.Handedness).IsRequired().HasMaxLength(10);
-                entity.Property(e => e.GLPlayerKey).HasColumnType("int");
-                entity.Property(e => e.PlayerStatusKey).HasColumnType("int");
+                entity.Property(e => e.AgentName).IsRequired(false).HasMaxLength(200);
+                entity.Property(e => e.AgentPhone).IsRequired(false).HasMaxLength(50);
+                entity.Property(e => e.CommittedTo).IsRequired(false).HasMaxLength(200);
+                entity.Property(e => e.Handedness).IsRequired(false).HasMaxLength(10);
+                entity.Property(e => e.GLPlayerKey).IsRequired(false).HasColumnType("int");
+                entity.Property(e => e.PlayerStatusKey).IsRequired(false).HasColumnType("int");
                 entity.Property(e => e.HeightSource).IsRequired().HasColumnName("Height_Source").HasMaxLength(100);
                 entity.Property(e => e.WeightSource).IsRequired().HasColumnName("Weight_Source").HasMaxLength(100);
                 entity.Property(e => e.WingSource).IsRequired().HasColumnName("Wing_Source").HasMaxLength(100);
@@ -143,9 +143,9 @@ namespace API.Data
                 entity.Property(e => e.VerticalJumpNoStepSource).IsRequired().HasColumnName("VerticalJumpNoStepSource_Source").HasMaxLength(100);
                 entity.Property(e => e.VerticalJumpMaxSource).IsRequired().HasColumnName("VerticalJumpMax_Source").HasMaxLength(100);
                 entity.Property(e => e.HandWHSource).IsRequired().HasColumnName("Hand_W_H_Source").HasMaxLength(100);
-                entity.Property(e => e.Hand).IsRequired().HasMaxLength(10);
+                entity.Property(e => e.Hand).IsRequired(false).HasMaxLength(10);
                 entity.Property(e => e.IsCustomData).HasDefaultValueSql("((0))");
-                entity.Property(e => e.HandednessSource).IsRequired().HasColumnName("Handedness_Source").HasMaxLength(100);
+                entity.Property(e => e.HandednessSource).IsRequired(false).HasColumnName("Handedness_Source").HasMaxLength(100);
             });
 
             modelBuilder.Entity<TeamPlayer>(entity =>
@@ -167,7 +167,7 @@ namespace API.Data
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
                 entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
                 entity.Property(e => e.ActiveFlag).HasColumnType("bit");
-                entity.Property(e => e.Order).HasColumnType("int");
+                entity.Property(e => e.Order).HasColumnType("int").IsRequired(false);
             });
 
             modelBuilder.Entity<ScoutingReport>(entity =>

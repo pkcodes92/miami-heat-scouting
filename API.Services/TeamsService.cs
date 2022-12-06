@@ -80,6 +80,10 @@ namespace API.Services
                     LeagueKey = x.LeagueKey,
                     TeamName = x.TeamName,
                     CurrentNBATeamFlag = x.CurrentNBATeamFlag,
+                    CoachName = x.CoachName,
+                    ArenaKey = x.ArenaKey,
+                    SubConference = x.SubConference,
+                    Conference = x.Conference,
                 }).ToListAsync();
             }
             catch (Exception ex)
