@@ -51,7 +51,7 @@ namespace API.Data
         /// <summary>
         /// Gets or sets the scout entities.
         /// </summary>
-        public virtual DbSet<User> Scouts { get; set; } = null!;
+        public virtual DbSet<User> Users { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the scouting report entities.
