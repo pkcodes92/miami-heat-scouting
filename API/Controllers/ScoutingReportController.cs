@@ -49,6 +49,7 @@ namespace API.Controllers
 
             if (!validationResult.IsValid)
             {
+                // TODO: Add the necessary error model.
                 return this.BadRequest(validationResult.Errors);
             }
 
