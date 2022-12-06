@@ -51,7 +51,7 @@ namespace API.Data
         /// <summary>
         /// Gets or sets the scout entities.
         /// </summary>
-        public virtual DbSet<Scout> Scouts { get; set; } = null!;
+        public virtual DbSet<User> Scouts { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the scouting report entities.
@@ -157,15 +157,17 @@ namespace API.Data
                 entity.Property(e => e.InsertDateTime).HasColumnType("datetime").HasColumnName("dwh_insert_datetime");
             });
 
-            modelBuilder.Entity<Scout>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
-                entity.ToTable("Scout", "dbo");
+                entity.ToTable("User", "dbo");
 
-                entity.HasKey(e => e.ScoutKey).HasName("PK_Scout");
-                entity.Property(e => e.ScoutFirstName).IsRequired();
-                entity.Property(e => e.ScoutLastName).IsRequired();
-                entity.Property(e => e.Created).HasColumnType("datetime").HasDefaultValueSql("(getdate())");
-                entity.Property(e => e.IsActive).HasColumnType("bit").HasDefaultValueSql("((1))");
+                entity.HasKey(e => e.AzureAdUserId).HasName("PK__User__76BABBB6FDC4FAD9");
+                entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Email).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
+                entity.Property(e => e.ActiveFlag).HasColumnType("bit");
+                entity.Property(e => e.Order).HasColumnType("int");
             });
 
             modelBuilder.Entity<ScoutingReport>(entity =>
