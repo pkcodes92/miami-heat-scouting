@@ -1,7 +1,6 @@
 ﻿// <copyright file="ScoutingReportService.cs" company="Miami Heat">
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
-
 namespace API.Services
 {
     using API.Data;
@@ -20,10 +19,10 @@ namespace API.Services
         private readonly ScoutContext scoutContext;
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="ScoutingReportService"/> class.
         /// </summary>
-        /// <param name="telemetryClient"></param>
-        /// <param name="scoutContext"></param>
+        /// <param name="telemetryClient">The application insights injection.</param>
+        /// <param name="scoutContext">The database layer injection.</param>
         public ScoutingReportService(TelemetryClient telemetryClient, ScoutContext scoutContext)
         {
             this.telemetryClient = telemetryClient;
