@@ -54,9 +54,9 @@ namespace API.Services
 
             this.scoutContext.ScoutingReports.Add(scoutingReportToInsert);
 
-            var result = await this.scoutContext.SaveChangesAsync();
+            await this.scoutContext.SaveChangesAsync();
 
-            return result;
+            return scoutingReportToInsert.ScoutingReportKey;
         }
     }
 }
