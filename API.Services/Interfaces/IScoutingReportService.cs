@@ -11,5 +11,10 @@ namespace API.Services.Interfaces
     /// </summary>
     public interface IScoutingReportService
     {
+        /// <summary>
+        /// This method definition will insert a new scouting report into the database.
+        /// </summary>
+        /// <returns>A new scouting report being added.</returns>
+        Task<ScoutingReport> InsertScoutingReport();
     }
 }

@@ -54,6 +54,8 @@ namespace API.Services
                     TeamNickname = x.TeamNickname,
                     URLPhoto = x.URLPhoto,
                 }).ToListAsync();
+
+                this.telemetryClient.TrackTrace($"Number of Teams retrieved: {teams.Count}");
             }
             catch (Exception ex)
             {
@@ -85,6 +87,8 @@ namespace API.Services
                     SubConference = x.SubConference,
                     Conference = x.Conference,
                 }).ToListAsync();
+
+                this.telemetryClient.TrackTrace($"Number of Teams retrieved: {teams.Count}");
             }
             catch (Exception ex)
             {
