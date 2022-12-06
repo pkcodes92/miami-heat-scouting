@@ -61,6 +61,7 @@ namespace API
             services.AddApplicationInsightsTelemetry();
 
             services.AddTransient<ITeamsService, TeamsService>();
+            services.AddTransient<IScoutingReportService, ScoutingReportService>();
         }
 
         /// <summary>

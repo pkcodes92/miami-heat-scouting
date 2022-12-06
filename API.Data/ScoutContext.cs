@@ -173,7 +173,7 @@ namespace API.Data
                 entity.ToTable("ScoutingReport", "dbo");
 
                 entity.HasKey(e => e.ScoutingReportKey).HasName("PK_ScoutingReport");
-                entity.Property(e => e.ScoutKey).HasColumnType("int");
+                entity.Property(e => e.ScoutId).IsRequired().HasColumnType("nvarchar").HasMaxLength(450);
                 entity.Property(e => e.PlayerKey).HasColumnType("int");
                 entity.Property(e => e.TeamKey).HasColumnType("int");
                 entity.Property(e => e.Defense).HasColumnType("int").HasColumnName("DefenseRating");
