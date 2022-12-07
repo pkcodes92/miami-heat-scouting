@@ -6,6 +6,8 @@ namespace API
 {
     using System.Reflection;
     using API.Data;
+    using API.Data.Repository;
+    using API.Data.Repository.Interfaces;
     using API.Services;
     using API.Services.Interfaces;
     using FluentValidation;
@@ -76,6 +78,11 @@ namespace API
 
             services.AddHealthChecks();
             services.AddApplicationInsightsTelemetry();
+
+            services.AddTransient<ITeamRepository, TeamRepository>();
+            services.AddTransient<IScoutingReportRepository, ScoutingReportRepository>();
+            services.AddTransient<IPlayerRepository, PlayerRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddTransient<ITeamsService, TeamsService>();
             services.AddTransient<IScoutingReportService, ScoutingReportService>();

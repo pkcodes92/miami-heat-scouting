@@ -5,10 +5,9 @@ namespace API.Services
 {
     using API.Common.DTO;
     using API.Common.Models.Input;
-    using API.Data;
+    using API.Data.Repository.Interfaces;
     using API.Services.Interfaces;
     using Microsoft.ApplicationInsights;
-    using Microsoft.EntityFrameworkCore;
 
     /// <summary>
     /// This class will implement the methods defined in <see cref="IScoutingReportService"/>.
@@ -16,17 +15,26 @@ namespace API.Services
     public class ScoutingReportService : IScoutingReportService
     {
         private readonly TelemetryClient telemetryClient;
-        private readonly ScoutContext scoutContext;
+        private readonly IPlayerRepository playerRepository;
+        private readonly IScoutingReportRepository scoutingReportRepository;
+        private readonly ITeamRepository teamRepository;
+        private readonly IUserRepository userRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ScoutingReportService"/> class.
         /// </summary>
         /// <param name="telemetryClient">The application insights injection.</param>
-        /// <param name="scoutContext">The database layer injection.</param>
-        public ScoutingReportService(TelemetryClient telemetryClient, ScoutContext scoutContext)
+        /// <param name="scoutingReportRepository">The injection of the scouting report repository.</param>
+        /// <param name="teamRepository">The injection of the team repository.</param>
+        /// <param name="playerRepository">The player repository injection.</param>
+        /// <param name="userRepository">The user repository injection.</param>
+        public ScoutingReportService(TelemetryClient telemetryClient, IScoutingReportRepository scoutingReportRepository, ITeamRepository teamRepository, IPlayerRepository playerRepository, IUserRepository userRepository)
         {
             this.telemetryClient = telemetryClient;
-            this.scoutContext = scoutContext;
+            this.scoutingReportRepository = scoutingReportRepository;
+            this.teamRepository = teamRepository;
+            this.playerRepository = playerRepository;
+            this.userRepository = userRepository;
         }
 
         /// <summary>
@@ -38,25 +46,11 @@ namespace API.Services
         {
             this.telemetryClient.TrackTrace("Inserting a new scouting report");
 
-            var user = await this.scoutContext.Users.FirstOrDefaultAsync(x => x.Name == newScoutingReport.ScoutName);
+            var user = await this.userRepository.GetUserByNameAsync(newScoutingReport.ScoutName);
 
-            var player = await this.scoutContext.Players.FirstOrDefaultAsync(p => p.FirstName == newScoutingReport.PlayerFirstName &&
-                p.LastName == newScoutingReport.PlayerLastName);
+            var player = await this.playerRepository.GetPlayerByFirstAndLastNameAsync(newScoutingReport.PlayerFirstName, newScoutingReport.PlayerLastName);
 
-            // When I wrote the code this way for querying the team, it worked.
-            // However, when I tried to write the code as above, it would not work.
-            var team = await this.scoutContext.Teams.Where(t => t.TeamName == newScoutingReport.TeamName &&
-                t.TeamCity == newScoutingReport.TeamCity &&
-                t.CurrentNBATeamFlag == true).Select(x => new Team
-                {
-                    TeamKey = x.TeamKey,
-                    CoachName = x.CoachName,
-                    TeamName = x.TeamName,
-                    Conference = x.Conference,
-                    Division = x.SubConference,
-                    TeamCity = x.TeamCity,
-                    TeamCountry = x.TeamCountry,
-                }).FirstOrDefaultAsync();
+            var team = await this.teamRepository.GetTeamByNameAndCityAsync(newScoutingReport.TeamName, newScoutingReport.TeamCity);
 
             var scoutingReportToInsert = new Data.Entities.ScoutingReport
             {
@@ -72,11 +66,9 @@ namespace API.Services
                 TeamKey = (int)team?.TeamKey!,
             };
 
-            this.scoutContext.ScoutingReports.Add(scoutingReportToInsert);
+            var insertedId = await this.scoutingReportRepository.InsertScoutingReportAsync(scoutingReportToInsert);
 
-            await this.scoutContext.SaveChangesAsync();
-
-            return scoutingReportToInsert.ScoutingReportKey;
+            return insertedId;
         }
 
         /// <summary>
@@ -86,19 +78,18 @@ namespace API.Services
         public async Task<List<ScoutingReport>> GetAllScoutingReportsAsync()
         {
             this.telemetryClient.TrackTrace("Getting all the scouting reports");
+            var dbScoutingReports = await this.scoutingReportRepository.GetAllScoutingReportsAsync();
 
-            var scoutingReports = await this.scoutContext.ScoutingReports.Select(x => new ScoutingReport
+            return dbScoutingReports.Select(x => new ScoutingReport
             {
-                ScoutId = x.ScoutId,
                 Assist = x.Assist,
                 Comments = x.Comments,
                 Defense = x.Defense,
                 Rebound = x.Rebound,
                 IsActive = (bool)x.IsCurrent!,
+                ScoutId = x.ScoutId,
                 Shooting = x.Shooting,
-            }).ToListAsync();
-
-            return scoutingReports;
+            }).ToList();
         }
     }
 }
