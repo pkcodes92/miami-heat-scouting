@@ -62,6 +62,6 @@ namespace API.Data.Entities
         /// <summary>
         /// Gets or sets a value indicating whether or not the scouting report is current.
         /// </summary>
-        public bool IsCurrent { get; set; }
+        public bool? IsCurrent { get; set; }
     }
 }

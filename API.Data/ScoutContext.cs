@@ -140,7 +140,7 @@ namespace API.Data
                 entity.Property(e => e.BodyFatSource).IsRequired().HasColumnName("BodyFat_Source").HasMaxLength(100);
                 entity.Property(e => e.StandingReachSource).IsRequired().HasColumnName("StandingReach_Source").HasMaxLength(100);
                 entity.Property(e => e.CourtRunTimeSource).IsRequired().HasColumnName("CourtRunTime_3_4_Source").HasMaxLength(100);
-                entity.Property(e => e.VerticalJumpNoStepSource).IsRequired().HasColumnName("VerticalJumpNoStepSource_Source").HasMaxLength(100);
+                entity.Property(e => e.VerticalJumpNoStepSource).IsRequired().HasColumnName("VerticalJumpNoStep_Source").HasMaxLength(100);
                 entity.Property(e => e.VerticalJumpMaxSource).IsRequired().HasColumnName("VerticalJumpMax_Source").HasMaxLength(100);
                 entity.Property(e => e.HandWHSource).IsRequired().HasColumnName("Hand_W_H_Source").HasMaxLength(100);
                 entity.Property(e => e.Hand).IsRequired(false).HasMaxLength(10);

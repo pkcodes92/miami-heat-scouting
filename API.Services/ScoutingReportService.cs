@@ -40,11 +40,23 @@ namespace API.Services
 
             var user = await this.scoutContext.Users.FirstOrDefaultAsync(x => x.Name == newScoutingReport.ScoutName);
 
-            var team = await this.scoutContext.Teams.FirstOrDefaultAsync(x => x.TeamCity == newScoutingReport.TeamCity &&
-                x.TeamNickname == newScoutingReport.TeamName);
-
             var player = await this.scoutContext.Players.FirstOrDefaultAsync(p => p.FirstName == newScoutingReport.PlayerFirstName &&
                 p.LastName == newScoutingReport.PlayerLastName);
+
+            // When I wrote the code this way for querying the team, it worked.
+            // However, when I tried to write the code as above, it would not work.
+            var team = await this.scoutContext.Teams.Where(t => t.TeamName == newScoutingReport.TeamName &&
+                t.TeamCity == newScoutingReport.TeamCity &&
+                t.CurrentNBATeamFlag == true).Select(x => new Team
+                {
+                    TeamKey = x.TeamKey,
+                    CoachName = x.CoachName,
+                    TeamName = x.TeamName,
+                    Conference = x.Conference,
+                    Division = x.SubConference,
+                    TeamCity = x.TeamCity,
+                    TeamCountry = x.TeamCountry,
+                }).FirstOrDefaultAsync();
 
             var scoutingReportToInsert = new Data.Entities.ScoutingReport
             {
