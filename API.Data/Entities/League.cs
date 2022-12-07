@@ -27,7 +27,7 @@ namespace API.Data.Entities
         /// <summary>
         /// Gets or sets a value indicating whether there is an active source.
         /// </summary>
-        public bool ActiveSource { get; set; }
+        public bool? ActiveSource { get; set; }
 
         /// <summary>
         /// Gets or sets the league group key.
@@ -42,6 +42,6 @@ namespace API.Data.Entities
         /// <summary>
         /// Gets or sets a value indicating whether or not this record should display.
         /// </summary>
-        public bool SearchDisplayFlag { get; set; }
+        public bool? SearchDisplayFlag { get; set; }
     }
 }

@@ -4,8 +4,9 @@
 
 namespace API.Services
 {
+    using API.Common;
+    using API.Common.DTO;
     using API.Data;
-    using API.Data.Entities;
     using API.Services.Interfaces;
     using Microsoft.ApplicationInsights;
     using Microsoft.EntityFrameworkCore;
@@ -35,33 +36,29 @@ namespace API.Services
         /// <returns>The list of NBA teams.</returns>
         public async Task<List<Team>> GetActiveTeamsAsync()
         {
-            List<Team> teams;
+            List<Team> teamsToReturn;
 
             try
             {
-                teams = await this.scoutContext.Teams.Where(x => x.CurrentNBATeamFlag == true).Select(x => new Team
+                teamsToReturn = await this.scoutContext.Teams.Where(x => x.CurrentNBATeamFlag == true).Select(x => new Team
                 {
-                    TeamKey = x.TeamKey,
-                    ArenaKey = x.ArenaKey,
                     CoachName = x.CoachName,
                     Conference = x.Conference,
-                    CurrentNBATeamFlag = x.CurrentNBATeamFlag,
-                    LeagueKey = x.LeagueKey,
-                    SubConference = x.SubConference,
-                    TeamCity = x.TeamCity,
-                    TeamCountry = x.TeamCountry,
+                    Division = x.SubConference,
                     TeamName = x.TeamName,
                     TeamNickname = x.TeamNickname,
-                    URLPhoto = x.URLPhoto,
+                    TeamCity = x.TeamCity,
+                    TeamCountry = x.TeamCountry,
+                    TeamKey = x.TeamKey,
                 }).ToListAsync();
             }
             catch (Exception ex)
             {
                 this.telemetryClient.TrackException(ex);
-                teams = null!;
+                teamsToReturn = null!;
             }
 
-            return teams;
+            return teamsToReturn;
         }
 
         /// <summary>
@@ -70,25 +67,29 @@ namespace API.Services
         /// <returns>A list of all the teams.</returns>
         public async Task<List<Team>> GetAllTeamsAsync()
         {
-            List<Team> teams;
+            List<Team> teamsToReturn;
 
             try
             {
-                teams = await this.scoutContext.Teams.Select(x => new Team
+                teamsToReturn = await this.scoutContext.Teams.Select(x => new Team
                 {
-                    TeamKey = x.TeamKey,
-                    LeagueKey = x.LeagueKey,
+                    CoachName = x.CoachName,
+                    Conference = x.Conference,
+                    Division = x.SubConference,
                     TeamName = x.TeamName,
-                    CurrentNBATeamFlag = x.CurrentNBATeamFlag,
+                    TeamNickname = x.TeamNickname,
+                    TeamCity = x.TeamCity,
+                    TeamCountry = x.TeamCountry,
+                    TeamKey = x.TeamKey,
                 }).ToListAsync();
             }
             catch (Exception ex)
             {
                 this.telemetryClient.TrackException(ex);
-                teams = null!;
+                teamsToReturn = null!;
             }
 
-            return teams;
+            return teamsToReturn;
         }
     }
 }

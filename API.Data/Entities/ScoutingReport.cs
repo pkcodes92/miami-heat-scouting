@@ -15,9 +15,9 @@ namespace API.Data.Entities
         public int ScoutingReportKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the scout key.
+        /// Gets or sets the scout ID.
         /// </summary>
-        public int ScoutKey { get; set; }
+        public string ScoutId { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the player key.
@@ -62,6 +62,6 @@ namespace API.Data.Entities
         /// <summary>
         /// Gets or sets a value indicating whether or not the scouting report is current.
         /// </summary>
-        public bool IsCurrent { get; set; }
+        public bool? IsCurrent { get; set; }
     }
 }
