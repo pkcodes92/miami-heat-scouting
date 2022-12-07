@@ -30,7 +30,22 @@ namespace API.Data.Repository
         /// <returns>A list of the team entity.</returns>
         public async Task<List<Team>> GetAllActiveTeamsAsync()
         {
-            var results = await this.scoutContext.Teams.Where(x => x.CurrentNBATeamFlag == true).ToListAsync();
+            var results = await this.scoutContext.Teams.Where(x => x.CurrentNBATeamFlag == true).Select(x => new Team
+            {
+                CurrentNBATeamFlag = x.CurrentNBATeamFlag,
+                LeagueKey = x.LeagueKey,
+                ArenaKey = x.ArenaKey,
+                CoachName = x.CoachName,
+                Conference = x.Conference,
+                SubConference = x.SubConference,
+                TeamCity = x.TeamCity,
+                TeamCountry = x.TeamCountry,
+                TeamName = x.TeamName,
+                TeamKey = x.TeamKey,
+                TeamNickname = x.TeamNickname,
+                URLPhoto = x.URLPhoto,
+            }).ToListAsync();
+
             return results;
         }
 
@@ -40,7 +55,22 @@ namespace API.Data.Repository
         /// <returns>A list of the team entity.</returns>
         public async Task<List<Team>> GetAllTeamsAsync()
         {
-            var results = await this.scoutContext.Teams.ToListAsync();
+            var results = await this.scoutContext.Teams.Select(x => new Team
+            {
+                CurrentNBATeamFlag = x.CurrentNBATeamFlag,
+                LeagueKey = x.LeagueKey,
+                ArenaKey = x.ArenaKey,
+                CoachName = x.CoachName,
+                Conference = x.Conference,
+                SubConference = x.SubConference,
+                TeamCity = x.TeamCity,
+                TeamCountry = x.TeamCountry,
+                TeamName = x.TeamName,
+                TeamKey = x.TeamKey,
+                TeamNickname = x.TeamNickname,
+                URLPhoto = x.URLPhoto,
+            }).ToListAsync();
+
             return results;
         }
 

@@ -20,11 +20,6 @@ namespace API.Data.Entities
         public int? LeagueKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the league key for the domestic league.
-        /// </summary>
-        public int? LeagueKeyDomestic { get; set; }
-
-        /// <summary>
         /// Gets or sets the arena key.
         /// </summary>
         public int? ArenaKey { get; set; }

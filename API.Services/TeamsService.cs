@@ -4,9 +4,9 @@
 
 namespace API.Services
 {
-    using API.Common;
     using API.Common.DTO;
     using API.Data;
+    using API.Data.Repository.Interfaces;
     using API.Services.Interfaces;
     using Microsoft.ApplicationInsights;
     using Microsoft.EntityFrameworkCore;
@@ -16,18 +16,18 @@ namespace API.Services
     /// </summary>
     public class TeamsService : ITeamsService
     {
-        private readonly ScoutContext scoutContext;
         private readonly TelemetryClient telemetryClient;
+        private readonly ITeamRepository teamRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TeamsService"/> class.
         /// </summary>
-        /// <param name="scoutContext">The database layer being injected.</param>
         /// <param name="telemetryClient">The telemetry tracking injection.</param>
-        public TeamsService(ScoutContext scoutContext, TelemetryClient telemetryClient)
+        /// <param name="teamRepository">The team repository injection.</param>
+        public TeamsService(TelemetryClient telemetryClient, ITeamRepository teamRepository)
         {
-            this.scoutContext = scoutContext;
             this.telemetryClient = telemetryClient;
+            this.teamRepository = teamRepository;
         }
 
         /// <summary>
@@ -40,17 +40,18 @@ namespace API.Services
 
             try
             {
-                teamsToReturn = await this.scoutContext.Teams.Where(x => x.CurrentNBATeamFlag == true).Select(x => new Team
+                var dbTeams = await this.teamRepository.GetAllActiveTeamsAsync();
+                teamsToReturn = dbTeams.Select(x => new Team
                 {
-                    CoachName = x.CoachName,
-                    Conference = x.Conference,
-                    Division = x.SubConference,
-                    TeamName = x.TeamName,
-                    TeamNickname = x.TeamNickname,
-                    TeamCity = x.TeamCity,
-                    TeamCountry = x.TeamCountry,
-                    TeamKey = x.TeamKey,
-                }).ToListAsync();
+                     CoachName = x.CoachName,
+                     Conference = x.Conference,
+                     Division = x.SubConference,
+                     TeamCity = x.TeamCity,
+                     TeamCountry = x.TeamCountry,
+                     TeamKey = x.TeamKey,
+                     TeamName = x.TeamName,
+                     TeamNickname = x.TeamNickname,
+                }).ToList();
             }
             catch (Exception ex)
             {
@@ -71,17 +72,18 @@ namespace API.Services
 
             try
             {
-                teamsToReturn = await this.scoutContext.Teams.Select(x => new Team
+                var dbTeams = await this.teamRepository.GetAllTeamsAsync();
+                teamsToReturn = dbTeams.Select(x => new Team
                 {
                     CoachName = x.CoachName,
                     Conference = x.Conference,
                     Division = x.SubConference,
-                    TeamName = x.TeamName,
-                    TeamNickname = x.TeamNickname,
                     TeamCity = x.TeamCity,
                     TeamCountry = x.TeamCountry,
                     TeamKey = x.TeamKey,
-                }).ToListAsync();
+                    TeamName = x.TeamName,
+                    TeamNickname = x.TeamNickname,
+                }).ToList();
             }
             catch (Exception ex)
             {

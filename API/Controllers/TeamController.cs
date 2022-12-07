@@ -39,6 +39,7 @@ namespace API.Controllers
         [Route("GetActiveTeams")]
         public async Task<ActionResult<GetTeamsResponse>> GetActiveTeamsAsync()
         {
+            this.telemetryClient.TrackTrace("Getting all the active teams");
             GetTeamsResponse apiResponse;
 
             var teams = await this.teamsService.GetActiveTeamsAsync();
@@ -62,9 +63,10 @@ namespace API.Controllers
         [Route("GetAllTeams")]
         public async Task<ActionResult> GetAllTeamsAsync()
         {
+            this.telemetryClient.TrackTrace("Getting all the teams");
             GetTeamsResponse apiResponse;
 
-            var teams = await this.teamsService.GetActiveTeamsAsync();
+            var teams = await this.teamsService.GetAllTeamsAsync();
 
             apiResponse = new GetTeamsResponse
             {
