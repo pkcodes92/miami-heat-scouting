@@ -3,9 +3,9 @@
 // </copyright>
 namespace API.Services
 {
+    using API.Common.Models.Input;
     using API.Data;
     using API.Data.Entities;
-    using API.Data.Models.Input;
     using API.Services.Interfaces;
     using Microsoft.ApplicationInsights;
     using Microsoft.EntityFrameworkCore;
@@ -36,6 +36,8 @@ namespace API.Services
         /// <returns>A unit of execution that contains a new scouting report.</returns>
         public async Task<int> InsertScoutingReportAsync(IncomingScoutingReport newScoutingReport)
         {
+            this.telemetryClient.TrackTrace("Inserting a new scouting report");
+
             var user = await this.scoutContext.Users.FirstOrDefaultAsync(x => x.Name == newScoutingReport.ScoutName);
 
             var scoutingReportToInsert = new ScoutingReport

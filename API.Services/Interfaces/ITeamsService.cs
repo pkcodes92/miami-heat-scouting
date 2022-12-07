@@ -4,7 +4,7 @@
 
 namespace API.Services.Interfaces
 {
-    using API.Data.Entities;
+    using API.Common.DTO;
 
     /// <summary>
     /// This interface defines the methods to be interacting with the <see cref="Team"/> entity.

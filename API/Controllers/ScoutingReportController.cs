@@ -4,9 +4,10 @@
 
 namespace API.Controllers
 {
+    using API.Common.Models;
+    using API.Common.Models.Input;
+    using API.Common.Models.Response;
     using API.Data.Entities;
-    using API.Data.Models.Input;
-    using API.Data.Models.Response;
     using API.Services.Interfaces;
     using API.Validators;
     using Microsoft.ApplicationInsights;
@@ -49,8 +50,25 @@ namespace API.Controllers
 
             if (!validationResult.IsValid)
             {
-                // TODO: Add the necessary error model.
-                return this.BadRequest(validationResult.Errors);
+                var validationList = new List<ValidationError>();
+
+                foreach (var item in validationResult.Errors)
+                {
+                    var validationItemToAdd = new ValidationError
+                    {
+                        ErrorCode = item.ErrorCode,
+                        Message = item.ErrorMessage,
+                    };
+
+                    validationList.Add(validationItemToAdd);
+                }
+
+                _ = new InsertScoutingReportResponse
+                {
+                    ScoutingReportId = 0,
+                    Success = false,
+                    ValidationErrors = validationList,
+                };
             }
 
             try
@@ -60,6 +78,7 @@ namespace API.Controllers
                 {
                     ScoutingReportId = scoutingReportId,
                     Success = true,
+                    ValidationErrors = null!,
                 };
             }
             catch (Exception ex)
@@ -67,12 +86,12 @@ namespace API.Controllers
                 this.telemetryClient.TrackException(ex);
                 apiResponse = new InsertScoutingReportResponse
                 {
-                    ScoutingReportId = 0,
                     Success = false,
+                    ScoutingReportId = 0,
                 };
             }
 
-            return this.Created("AddNewScoutingReport", incomingScoutingReport);
+            return this.Ok(apiResponse);
         }
 
         /// <summary>

@@ -4,7 +4,8 @@
 
 namespace API.Controllers
 {
-    using API.Data.Entities;
+    using API.Common.DTO;
+    using API.Common.Models.Response;
     using API.Services.Interfaces;
     using Microsoft.ApplicationInsights;
     using Microsoft.AspNetCore.Mvc;
@@ -36,21 +37,21 @@ namespace API.Controllers
         /// <returns>A list of the teams.</returns>
         [HttpGet]
         [Route("GetActiveTeams")]
-        public async Task<ActionResult<List<Team>>> GetActiveTeamsAsync()
+        public async Task<ActionResult<GetTeamsResponse>> GetActiveTeamsAsync()
         {
-            List<Team> teams;
+            GetTeamsResponse apiResponse;
 
-            try
-            {
-                teams = await this.teamsService.GetActiveTeamsAsync();
-            }
-            catch (Exception ex)
-            {
-                this.telemetryClient.TrackException(ex);
-                teams = null!;
-            }
+            var teams = await this.teamsService.GetActiveTeamsAsync();
 
-            return teams;
+            apiResponse = new GetTeamsResponse
+            {
+                Count = teams.Count > 0 ? teams.Count : 0,
+                Success = teams.Count > 0,
+                Teams = teams,
+                ValidationErrors = null!,
+            };
+
+            return this.Ok(apiResponse);
         }
 
         /// <summary>
@@ -59,21 +60,21 @@ namespace API.Controllers
         /// <returns>Returns all the teams from the database.</returns>
         [HttpGet]
         [Route("GetAllTeams")]
-        public async Task<ActionResult<List<Team>>> GetAllTeamsAsync()
+        public async Task<ActionResult> GetAllTeamsAsync()
         {
-            List<Team> teams;
+            GetTeamsResponse apiResponse;
 
-            try
-            {
-                teams = await this.teamsService.GetAllTeamsAsync();
-            }
-            catch (Exception ex)
-            {
-                this.telemetryClient.TrackException(ex);
-                teams = null!;
-            }
+            var teams = await this.teamsService.GetActiveTeamsAsync();
 
-            return teams;
+            apiResponse = new GetTeamsResponse
+            {
+                Count = teams.Count > 0 ? teams.Count : 0,
+                Success = teams.Count > 0,
+                Teams = teams,
+                ValidationErrors = null!,
+            };
+
+            return this.Ok(apiResponse);
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace API.Data.Models.Input
+namespace API.Common.Models.Input
 {
     /// <summary>
     /// This class represents an incoming scouting report.

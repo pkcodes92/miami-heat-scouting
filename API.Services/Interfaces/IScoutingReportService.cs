@@ -4,8 +4,8 @@
 
 namespace API.Services.Interfaces
 {
+    using API.Common.Models.Input;
     using API.Data.Entities;
-    using API.Data.Models.Input;
 
     /// <summary>
     /// This interface will contain the necessary methods to perform CRUD operations on the <see cref="ScoutingReport"/> entity.

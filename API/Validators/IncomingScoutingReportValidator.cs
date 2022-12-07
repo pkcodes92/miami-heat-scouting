@@ -4,7 +4,7 @@
 
 namespace API.Validators
 {
-    using API.Data.Models.Input;
+    using API.Common.Models.Input;
     using FluentValidation;
 
     /// <summary>
