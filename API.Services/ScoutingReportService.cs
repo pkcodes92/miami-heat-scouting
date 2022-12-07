@@ -3,9 +3,9 @@
 // </copyright>
 namespace API.Services
 {
+    using API.Common.DTO;
     using API.Common.Models.Input;
     using API.Data;
-    using API.Data.Entities;
     using API.Services.Interfaces;
     using Microsoft.ApplicationInsights;
     using Microsoft.EntityFrameworkCore;
@@ -40,9 +40,15 @@ namespace API.Services
 
             var user = await this.scoutContext.Users.FirstOrDefaultAsync(x => x.Name == newScoutingReport.ScoutName);
 
-            var scoutingReportToInsert = new ScoutingReport
+            var team = await this.scoutContext.Teams.FirstOrDefaultAsync(x => x.TeamCity == newScoutingReport.TeamCity &&
+                x.TeamNickname == newScoutingReport.TeamName);
+
+            var player = await this.scoutContext.Players.FirstOrDefaultAsync(p => p.FirstName == newScoutingReport.PlayerFirstName &&
+                p.LastName == newScoutingReport.PlayerLastName);
+
+            var scoutingReportToInsert = new Data.Entities.ScoutingReport
             {
-                PlayerKey = 16,
+                PlayerKey = (int)player?.PlayerKey!,
                 Assist = newScoutingReport.AssistRating,
                 Comments = newScoutingReport.Comments,
                 Defense = newScoutingReport.DefenseRating,
@@ -51,7 +57,7 @@ namespace API.Services
                 Created = DateTime.Now,
                 IsCurrent = true,
                 ScoutId = user?.AzureAdUserId!,
-                TeamKey = 16,
+                TeamKey = (int)team?.TeamKey!,
             };
 
             this.scoutContext.ScoutingReports.Add(scoutingReportToInsert);
@@ -59,6 +65,22 @@ namespace API.Services
             await this.scoutContext.SaveChangesAsync();
 
             return scoutingReportToInsert.ScoutingReportKey;
+        }
+
+        /// <summary>
+        /// This method implementation gets all of the scouting reports in the database.
+        /// </summary>
+        /// <returns>A list of scouting reports to return to the API.</returns>
+        public async Task<List<ScoutingReport>> GetAllScoutingReportsAsync()
+        {
+            this.telemetryClient.TrackTrace("Getting all the scouting reports");
+
+            var scoutingReports = await this.scoutContext.ScoutingReports.Select(x => new ScoutingReport
+            {
+                ScoutId = x.ScoutId,
+            }).ToListAsync();
+
+            return scoutingReports;
         }
     }
 }

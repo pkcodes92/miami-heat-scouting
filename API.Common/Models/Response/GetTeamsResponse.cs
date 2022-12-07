@@ -14,8 +14,5 @@ namespace API.Common.Models.Response
     {
         [JsonProperty("teams")]
         public List<Team> Teams { get; set; } = null!;
-
-        [JsonProperty("count")]
-        public int Count { get; set; }
     }
 }

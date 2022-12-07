@@ -20,8 +20,6 @@ namespace API.Validators
             this.RuleFor(p => p.ScoutName)
                    .Cascade(CascadeMode.Stop)
                    .NotEmpty().WithMessage("{PropertyName} should not be empty")
-                   .MaximumLength(25)
-                   .Must(this.IsValidName).WithMessage("{PropertyName} should be an actual name")
                    .WithErrorCode("SR001");
 
             this.RuleFor(p => p.DefenseRating)
@@ -47,11 +45,6 @@ namespace API.Validators
                 .InclusiveBetween(1, 10)
                 .WithMessage("{PropertyName} has to be between 1 and 10")
                 .WithErrorCode("SR005");
-        }
-
-        private bool IsValidName(string name)
-        {
-            return name.All(char.IsLetter);
         }
     }
 }

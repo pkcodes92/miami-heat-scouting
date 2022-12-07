@@ -11,6 +11,26 @@ namespace API.Common.Models.Input
         public string ScoutName { get; set; } = null!;
 
         /// <summary>
+        /// Gets or sets the team city.
+        /// </summary>
+        public string TeamCity { get; set; } = null!;
+
+        /// <summary>
+        /// Gets or sets the team name.
+        /// </summary>
+        public string TeamName { get; set; } = null!;
+
+        /// <summary>
+        /// Gets or sets the player first name.
+        /// </summary>
+        public string PlayerFirstName { get; set; } = null!;
+
+        /// <summary>
+        /// Gets or sets the player last name.
+        /// </summary>
+        public string PlayerLastName { get; set; } = null!;
+
+        /// <summary>
         /// Gets or sets the shooting rating.
         /// </summary>
         public int ShootingRating { get; set; }

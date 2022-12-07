@@ -19,5 +19,11 @@ namespace API.Common.Models
         /// </summary>
         [JsonProperty("errors")]
         public List<ValidationError> ValidationErrors { get; set; } = null!;
+
+        /// <summary>
+        /// Gets or sets the count.
+        /// </summary>
+        [JsonProperty("count")]
+        public int Count { get; set; }
     }
 }

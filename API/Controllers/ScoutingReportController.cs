@@ -10,6 +10,7 @@ namespace API.Controllers
     using API.Data.Entities;
     using API.Services.Interfaces;
     using API.Validators;
+    using FluentValidation.Results;
     using Microsoft.ApplicationInsights;
     using Microsoft.AspNetCore.Mvc;
 
@@ -50,25 +51,17 @@ namespace API.Controllers
 
             if (!validationResult.IsValid)
             {
-                var validationList = new List<ValidationError>();
+                var validationList = this.BuildValidationErrors(validationResult);
 
-                foreach (var item in validationResult.Errors)
-                {
-                    var validationItemToAdd = new ValidationError
-                    {
-                        ErrorCode = item.ErrorCode,
-                        Message = item.ErrorMessage,
-                    };
-
-                    validationList.Add(validationItemToAdd);
-                }
-
-                _ = new InsertScoutingReportResponse
+                var apiErrorResponse = new InsertScoutingReportResponse
                 {
                     ScoutingReportId = 0,
                     Success = false,
                     ValidationErrors = validationList,
+                    Count = 0,
                 };
+
+                return this.Ok(apiErrorResponse);
             }
 
             try
@@ -88,6 +81,8 @@ namespace API.Controllers
                 {
                     Success = false,
                     ScoutingReportId = 0,
+                    Count = 0,
+                    ValidationErrors = null!,
                 };
             }
 
@@ -102,7 +97,37 @@ namespace API.Controllers
         [Route("GetAllScoutingReports")]
         public async Task<ActionResult> GetAllScoutingReportsAsync()
         {
-            return this.Ok();
+            GetScoutingReportsResponse apiResponse;
+
+            var scoutingReports = await this.scoutingReportService.GetAllScoutingReportsAsync();
+
+            apiResponse = new GetScoutingReportsResponse
+            {
+                ScoutingReports = scoutingReports,
+                Count = scoutingReports.Count,
+                Success = scoutingReports.Count > 0,
+                ValidationErrors = null!,
+            };
+
+            return this.Ok(apiResponse);
+        }
+
+        private List<ValidationError> BuildValidationErrors(ValidationResult result)
+        {
+            var validationList = new List<ValidationError>();
+
+            foreach (var item in result.Errors)
+            {
+                var validationItemToAdd = new ValidationError
+                {
+                    ErrorCode = item.ErrorCode,
+                    Message = item.ErrorMessage,
+                };
+
+                validationList.Add(validationItemToAdd);
+            }
+
+            return validationList;
         }
     }
 }
