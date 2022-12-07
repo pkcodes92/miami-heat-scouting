@@ -20,31 +20,31 @@ namespace API.Validators
             this.RuleFor(p => p.ScoutName)
                    .Cascade(CascadeMode.Stop)
                    .NotEmpty().WithMessage("{PropertyName} should not be empty")
-                   .WithErrorCode("SR001");
+                   .WithErrorCode("ISR001");
 
             this.RuleFor(p => p.DefenseRating)
                 .Cascade(CascadeMode.Stop)
                 .InclusiveBetween(1, 10)
                 .WithMessage("{PropertyName} has to be between 1 and 10")
-                .WithErrorCode("SR002");
+                .WithErrorCode("ISR002");
 
             this.RuleFor(p => p.ReboundRating)
                 .Cascade(CascadeMode.Stop)
                 .InclusiveBetween(1, 10)
                 .WithMessage("{PropertyName} has to be between 1 and 10")
-                .WithErrorCode("SR003");
+                .WithErrorCode("ISR003");
 
             this.RuleFor(p => p.AssistRating)
                 .Cascade(CascadeMode.Stop)
                 .InclusiveBetween(1, 10)
                 .WithMessage("{PropertyName} has to be between 1 and 10")
-                .WithErrorCode("SR004");
+                .WithErrorCode("ISR004");
 
             this.RuleFor(p => p.ShootingRating)
                 .Cascade(CascadeMode.Stop)
                 .InclusiveBetween(1, 10)
                 .WithMessage("{PropertyName} has to be between 1 and 10")
-                .WithErrorCode("SR005");
+                .WithErrorCode("ISR005");
         }
     }
 }
