@@ -90,6 +90,12 @@ namespace API.Services
             var scoutingReports = await this.scoutContext.ScoutingReports.Select(x => new ScoutingReport
             {
                 ScoutId = x.ScoutId,
+                Assist = x.Assist,
+                Comments = x.Comments,
+                Defense = x.Defense,
+                Rebound = x.Rebound,
+                IsActive = (bool)x.IsCurrent!,
+                Shooting = x.Shooting,
             }).ToListAsync();
 
             return scoutingReports;
