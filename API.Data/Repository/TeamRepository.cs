@@ -18,7 +18,7 @@ namespace API.Data.Repository
         /// <summary>
         /// Initializes a new instance of the <see cref="TeamRepository"/> class.
         /// </summary>
-        /// <param name="scoutContext"></param>
+        /// <param name="scoutContext">The database context injection.</param>
         public TeamRepository(ScoutContext scoutContext)
         {
             this.scoutContext = scoutContext;

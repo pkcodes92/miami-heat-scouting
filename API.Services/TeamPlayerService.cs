@@ -4,7 +4,8 @@
 
 namespace API.Services
 {
-    using API.Data.Entities;
+    using API.Common.DTO;
+    using API.Data.Repository.Interfaces;
     using API.Services.Interfaces;
 
     /// <summary>
@@ -12,14 +13,15 @@ namespace API.Services
     /// </summary>
     public class TeamPlayerService : ITeamPlayerService
     {
+        private readonly ITeamPlayerRepository teamPlayerRepository;
+
         /// <summary>
-        /// Return a single team player querying by the key.
+        /// Initializes a new instance of the <see cref="TeamPlayerService"/> class.
         /// </summary>
-        /// <param name="teamPlayerKey">The primary key.</param>
-        /// <returns>A single team player entity.</returns>
-        public async Task<TeamPlayer> GetTeamPlayerByKey(int teamPlayerKey)
+        /// <param name="teamPlayerRepository">The player team database layer injection.</param>
+        public TeamPlayerService(ITeamPlayerRepository teamPlayerRepository)
         {
-            return null!;
+            this.teamPlayerRepository = teamPlayerRepository;
         }
 
         /// <summary>
@@ -29,6 +31,7 @@ namespace API.Services
         /// <returns>A list of team player entities.</returns>
         public async Task<List<TeamPlayer>> GetTeamPlayersBySeason(int season)
         {
+            var dbTeamPlayers = await this.teamPlayerRepository.GetTeamPlayersBySeasonAsync(season);
             return null!;
         }
     }

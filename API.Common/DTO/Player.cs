@@ -1,4 +1,4 @@
-﻿// <copyright file="Error.cs" company="Miami Heat">
+﻿// <copyright file="Player.cs" company="Miami Heat">
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 

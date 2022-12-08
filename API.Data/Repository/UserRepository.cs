@@ -8,10 +8,17 @@ namespace API.Data.Repository
     using API.Data.Repository.Interfaces;
     using Microsoft.EntityFrameworkCore;
 
+    /// <summary>
+    /// This class implements the methods defined in <see cref="IUserRepository"/>.
+    /// </summary>
     public class UserRepository : IUserRepository
     {
         private readonly ScoutContext scoutContext;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserRepository"/> class.
+        /// </summary>
+        /// <param name="scoutContext">The database context injection.</param>
         public UserRepository(ScoutContext scoutContext)
         {
             this.scoutContext = scoutContext;
