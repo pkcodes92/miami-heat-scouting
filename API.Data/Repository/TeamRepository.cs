@@ -43,7 +43,7 @@ namespace API.Data.Repository
                 TeamName = x.TeamName,
                 TeamKey = x.TeamKey,
                 TeamNickname = x.TeamNickname,
-                URLPhoto = x.URLPhoto,
+                UrlPhoto = x.UrlPhoto,
             }).ToListAsync();
 
             return results;
@@ -68,10 +68,10 @@ namespace API.Data.Repository
                 TeamName = x.TeamName,
                 TeamKey = x.TeamKey,
                 TeamNickname = x.TeamNickname,
-                URLPhoto = x.URLPhoto,
+                UrlPhoto = x.UrlPhoto,
             }).ToListAsync();
 
-            return results;
+            return results!;
         }
 
         /// <summary>
