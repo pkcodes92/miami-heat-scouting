@@ -68,6 +68,7 @@ namespace API.Data
 
             modelBuilder.Entity<League>(entity =>
             {
+                entity.ToTable("League", "dbo");
                 entity.HasKey(e => e.LeagueKey);
 
                 entity.Property(e => e.LeagueKey).ValueGeneratedNever();
@@ -81,6 +82,7 @@ namespace API.Data
 
             modelBuilder.Entity<Team>(entity =>
             {
+                entity.ToTable("Team", "dbo");
                 entity.HasKey(e => e.TeamKey);
                 entity.HasIndex(e => new { e.TeamKey, e.LeagueKey }, "UK_DimTeam").IsUnique();
 
@@ -89,8 +91,7 @@ namespace API.Data
                 entity.Property(e => e.Conference).HasMaxLength(100);
 
                 entity.Property(e => e.CurrentNBATeamFlag)
-                      .HasColumnName("CurrentNBATeamFlg")
-                      .HasDefaultValue("((0))");
+                      .HasColumnName("CurrentNBATeamFlg");
 
                 entity.Property(e => e.LeagueKeyDomestic).HasColumnName("LeagueKey_Domestic");
                 entity.Property(e => e.SubConference).HasMaxLength(100);
@@ -116,6 +117,7 @@ namespace API.Data
 
             modelBuilder.Entity<Player>(entity =>
             {
+                entity.ToTable("Player", "dbo");
                 entity.HasKey(e => e.PlayerKey);
 
                 entity.Property(e => e.PlayerKey).ValueGeneratedNever();
@@ -207,6 +209,7 @@ namespace API.Data
 
             modelBuilder.Entity<TeamPlayer>(entity =>
             {
+                entity.ToTable("TeamPlayer", "dbo");
                 entity.HasKey(e => new { e.PlayerKey, e.TeamKey, e.SeasonKey });
                 entity.Property(e => e.InsertDateTime)
                       .HasColumnType("datetime")
@@ -228,6 +231,7 @@ namespace API.Data
 
             modelBuilder.Entity<User>(entity =>
             {
+                entity.ToTable("User", "dbo");
                 entity.HasKey(e => e.AzureAdUserId).HasName("PK__User__76BABBB6FEEB0689");
 
                 entity.Property(e => e.ActiveFlag)

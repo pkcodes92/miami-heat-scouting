@@ -16,6 +16,14 @@ namespace API.Services.Interfaces
         /// </summary>
         /// <param name="season">The season value.</param>
         /// <returns>A list of the type of <see cref="TeamPlayer"/>.</returns>
-        Task<List<TeamPlayer>> GetTeamPlayersBySeason(int season);
+        Task<List<TeamPlayer>> GetTeamPlayersBySeasonAsync(int season);
+
+        /// <summary>
+        /// Gets the necessary team player by the player ID and season.
+        /// </summary>
+        /// <param name="playerKey">The primary key of the player entity.</param>
+        /// <param name="season">The season to search for.</param>
+        /// <returns>A single <see cref="TeamPlayer"/>.</returns>
+        Task<TeamPlayer> GetTeamPlayerBySeasonAsync(int playerKey, int season);
     }
 }

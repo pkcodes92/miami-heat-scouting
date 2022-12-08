@@ -29,10 +29,37 @@ namespace API.Services
         /// </summary>
         /// <param name="season">The season to search.</param>
         /// <returns>A list of team player entities.</returns>
-        public async Task<List<TeamPlayer>> GetTeamPlayersBySeason(int season)
+        public async Task<List<TeamPlayer>> GetTeamPlayersBySeasonAsync(int season)
         {
             var dbTeamPlayers = await this.teamPlayerRepository.GetTeamPlayersBySeasonAsync(season);
-            return null!;
+            return dbTeamPlayers.Select(x => new TeamPlayer
+            {
+                PlayerKey = x.PlayerKey,
+                Season = x.SeasonKey,
+                TeamKey = x.TeamKey,
+            }).ToList();
+        }
+
+        /// <summary>
+        /// This method returns the team player by the player primary key and season.
+        /// </summary>
+        /// <param name="playerKey">The player primary key.</param>
+        /// <param name="season">The season to search.</param>
+        /// <returns>A single <see cref="TeamPlayer"/> record.</returns>
+        public async Task<TeamPlayer> GetTeamPlayerBySeasonAsync(int playerKey, int season)
+        {
+            TeamPlayer recordToReturn;
+
+            var dbTeamPlayer = await this.teamPlayerRepository.GetActiveTeamPlayerAsync(playerKey, season);
+
+            recordToReturn = new TeamPlayer
+            {
+                PlayerKey = (int)dbTeamPlayer?.PlayerKey!,
+                Season = (int)dbTeamPlayer?.SeasonKey!,
+                TeamKey = (int)dbTeamPlayer?.TeamKey!,
+            };
+
+            return recordToReturn;
         }
     }
 }

@@ -40,42 +40,42 @@ namespace API.Data.Entities
         /// <summary>
         /// Gets or sets the team name.
         /// </summary>
-        public string TeamName { get; set; } = null!;
+        public string? TeamName { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the team nickname.
         /// </summary>
-        public string TeamNickname { get; set; } = null!;
+        public string? TeamNickname { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the conference.
         /// </summary>
-        public string Conference { get; set; } = null!;
+        public string? Conference { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the sub-conference, or the division.
         /// </summary>
-        public string SubConference { get; set; } = null!;
+        public string? SubConference { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the team city.
         /// </summary>
-        public string TeamCity { get; set; } = null!;
+        public string? TeamCity { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the team country.
         /// </summary>
-        public string TeamCountry { get; set; } = null!;
+        public string? TeamCountry { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the name of the head coach.
         /// </summary>
-        public string CoachName { get; set; } = null!;
+        public string? CoachName { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the photo URL.
         /// </summary>
-        public string UrlPhoto { get; set; } = null!;
+        public string? UrlPhoto { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets a value indicating whether the team is currently in the NBA.

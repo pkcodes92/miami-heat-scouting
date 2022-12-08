@@ -18,16 +18,19 @@ namespace API.Controllers
     {
         private readonly TelemetryClient telemetryClient;
         private readonly IPlayerService playerService;
+        private readonly ITeamPlayerService teamPlayerService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerController"/> class.
         /// </summary>
         /// <param name="telemetryClient">The application insights injection.</param>
         /// <param name="playerService">The player service injection.</param>
-        public PlayerController(TelemetryClient telemetryClient, IPlayerService playerService)
+        /// <param name="teamPlayerService">The team-player service injection.</param>
+        public PlayerController(TelemetryClient telemetryClient, IPlayerService playerService, ITeamPlayerService teamPlayerService)
         {
             this.telemetryClient = telemetryClient;
             this.playerService = playerService;
+            this.teamPlayerService = teamPlayerService;
         }
 
         /// <summary>
@@ -37,13 +40,16 @@ namespace API.Controllers
         /// <param name="firstName">The first name of the player.</param>
         /// <param name="lastName">The last name of the player.</param>
         /// <returns>A unit of execution.</returns>
-        [HttpGet("SearchPlayer")]
+        [HttpGet("SearchPlayer/{season}")]
         public async Task<ActionResult> SearchPlayerAsync(int season, string firstName, string lastName)
         {
             this.telemetryClient.TrackTrace($"Searching for the player: {firstName} {lastName} in the {season} NBA season");
 
             var player = await this.playerService.GetPlayerByFirstAndLastNameAsync(firstName, lastName);
-            return this.Ok();
+
+            var teamPlayer = await this.teamPlayerService.GetTeamPlayerBySeasonAsync(player.PlayerId, season);
+
+            return this.Ok(player);
         }
     }
 }
