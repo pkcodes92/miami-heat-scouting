@@ -87,14 +87,14 @@ namespace API.Data
                 entity.HasKey(e => e.LeagueKey).HasName("FK_Team_League");
 
                 entity.Property(e => e.ArenaKey).IsRequired(false).HasColumnType("int");
-                entity.Property(e => e.TeamName).IsRequired().HasMaxLength(50);
-                entity.Property(e => e.TeamNickname).HasMaxLength(100);
+                entity.Property(e => e.TeamName).IsRequired(false).HasMaxLength(50);
+                entity.Property(e => e.TeamNickname).IsRequired(false).HasMaxLength(100);
                 entity.Property(e => e.Conference).IsRequired(false).HasMaxLength(100);
                 entity.Property(e => e.SubConference).IsRequired(false).HasMaxLength(100);
-                entity.Property(e => e.TeamCity).HasMaxLength(100);
-                entity.Property(e => e.TeamCountry).HasMaxLength(100);
+                entity.Property(e => e.TeamCity).IsRequired(false).HasMaxLength(100);
+                entity.Property(e => e.TeamCountry).IsRequired(false).HasMaxLength(100);
                 entity.Property(e => e.CoachName).IsRequired(false).HasMaxLength(100);
-                entity.Property(e => e.URLPhoto).HasMaxLength(250);
+                entity.Property(e => e.URLPhoto).IsRequired(false).HasMaxLength(250);
                 entity.Property(e => e.CurrentNBATeamFlag).HasColumnName("CurrentNBATeamFlg").HasDefaultValueSql("((0))");
             });
 
