@@ -18,7 +18,7 @@ namespace API.Controllers
     /// This controller will have all the API methods for the <see cref="ScoutingReport"/> entity.
     /// </summary>
     [ApiController]
-    [Route("Scout")]
+    [Route("[controller]")]
     public class ScoutingReportController : ControllerBase
     {
         private readonly TelemetryClient telemetryClient;
