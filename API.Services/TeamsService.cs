@@ -4,8 +4,9 @@
 
 namespace API.Services
 {
+    using API.Common.DTO;
     using API.Data;
-    using API.Entities;
+    using API.Data.Repository.Interfaces;
     using API.Services.Interfaces;
     using Microsoft.ApplicationInsights;
     using Microsoft.EntityFrameworkCore;
@@ -15,18 +16,18 @@ namespace API.Services
     /// </summary>
     public class TeamsService : ITeamsService
     {
-        private readonly ScoutContext scoutContext;
         private readonly TelemetryClient telemetryClient;
+        private readonly ITeamRepository teamRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TeamsService"/> class.
         /// </summary>
-        /// <param name="scoutContext">The database layer being injected.</param>
         /// <param name="telemetryClient">The telemetry tracking injection.</param>
-        public TeamsService(ScoutContext scoutContext, TelemetryClient telemetryClient)
+        /// <param name="teamRepository">The team repository injection.</param>
+        public TeamsService(TelemetryClient telemetryClient, ITeamRepository teamRepository)
         {
-            this.scoutContext = scoutContext;
             this.telemetryClient = telemetryClient;
+            this.teamRepository = teamRepository;
         }
 
         /// <summary>
@@ -35,33 +36,30 @@ namespace API.Services
         /// <returns>The list of NBA teams.</returns>
         public async Task<List<Team>> GetActiveTeamsAsync()
         {
-            List<Team> teams;
+            List<Team> teamsToReturn;
 
             try
             {
-                teams = await this.scoutContext.Teams.Where(x => x.CurrentNBATeamFlag == true).Select(x => new Team
+                var dbTeams = await this.teamRepository.GetAllActiveTeamsAsync();
+                teamsToReturn = dbTeams.Select(x => new Team
                 {
-                    TeamKey = x.TeamKey,
-                    ArenaKey = x.ArenaKey,
-                    CoachName = x.CoachName,
-                    Conference = x.Conference,
-                    CurrentNBATeamFlag = x.CurrentNBATeamFlag,
-                    LeagueKey = x.LeagueKey,
-                    SubConference = x.SubConference,
-                    TeamCity = x.TeamCity,
-                    TeamCountry = x.TeamCountry,
-                    TeamName = x.TeamName,
-                    TeamNickname = x.TeamNickname,
-                    URLPhoto = x.URLPhoto,
-                }).ToListAsync();
+                     CoachName = x.CoachName,
+                     Conference = x.Conference,
+                     Division = x.SubConference,
+                     TeamCity = x.TeamCity,
+                     TeamCountry = x.TeamCountry,
+                     TeamKey = x.TeamKey,
+                     TeamName = x.TeamName,
+                     TeamNickname = x.TeamNickname,
+                }).ToList();
             }
             catch (Exception ex)
             {
                 this.telemetryClient.TrackException(ex);
-                teams = null!;
+                teamsToReturn = null!;
             }
 
-            return teams;
+            return teamsToReturn;
         }
 
         /// <summary>
@@ -70,25 +68,30 @@ namespace API.Services
         /// <returns>A list of all the teams.</returns>
         public async Task<List<Team>> GetAllTeamsAsync()
         {
-            List<Team> teams;
+            List<Team> teamsToReturn;
 
             try
             {
-                teams = await this.scoutContext.Teams.Select(x => new Team
+                var dbTeams = await this.teamRepository.GetAllTeamsAsync();
+                teamsToReturn = dbTeams.Select(x => new Team
                 {
+                    CoachName = x.CoachName,
+                    Conference = x.Conference,
+                    Division = x.SubConference,
+                    TeamCity = x.TeamCity,
+                    TeamCountry = x.TeamCountry,
                     TeamKey = x.TeamKey,
-                    LeagueKey = x.LeagueKey,
                     TeamName = x.TeamName,
-                    CurrentNBATeamFlag = x.CurrentNBATeamFlag,
-                }).ToListAsync();
+                    TeamNickname = x.TeamNickname,
+                }).ToList();
             }
             catch (Exception ex)
             {
                 this.telemetryClient.TrackException(ex);
-                teams = null!;
+                teamsToReturn = null!;
             }
 
-            return teams;
+            return teamsToReturn;
         }
     }
 }

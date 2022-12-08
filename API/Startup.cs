@@ -4,9 +4,14 @@
 
 namespace API
 {
+    using System.Reflection;
     using API.Data;
+    using API.Data.Repository;
+    using API.Data.Repository.Interfaces;
     using API.Services;
     using API.Services.Interfaces;
+    using FluentValidation;
+    using FluentValidation.AspNetCore;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
@@ -54,13 +59,33 @@ namespace API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Miami Scouting Reports API", Version = "v1" });
+                c.SwaggerDoc(
+                    "v1",
+                    new OpenApiInfo
+                    {
+                        Title = "Miami Scouting Reports API",
+                        Version = "v1",
+                        Contact = new OpenApiContact
+                        {
+                            Email = "pkrish19@outlook.com",
+                            Name = "Pranav Krishnamurthy",
+                        },
+                    });
             });
+
+            services.AddFluentValidationClientsideAdapters();
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             services.AddHealthChecks();
             services.AddApplicationInsightsTelemetry();
 
+            services.AddTransient<ITeamRepository, TeamRepository>();
+            services.AddTransient<IScoutingReportRepository, ScoutingReportRepository>();
+            services.AddTransient<IPlayerRepository, PlayerRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+
             services.AddTransient<ITeamsService, TeamsService>();
+            services.AddTransient<IScoutingReportService, ScoutingReportService>();
         }
 
         /// <summary>

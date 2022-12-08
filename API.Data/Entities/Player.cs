@@ -2,7 +2,7 @@
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 
-namespace API.Entities
+namespace API.Data.Entities
 {
     /// <summary>
     /// This file represents the player entity.
@@ -107,7 +107,7 @@ namespace API.Entities
         /// <summary>
         /// Gets or sets a value indicating whether or not the player is actively analyzed.
         /// </summary>
-        public bool ActiveAnalysisFlag { get; set; }
+        public bool? ActiveAnalysisFlag { get; set; }
 
         /// <summary>
         /// Gets or sets the league custom group key of the player.
@@ -212,7 +212,7 @@ namespace API.Entities
         /// <summary>
         /// Gets or sets a value indicating whether the data being provided is a custom data.
         /// </summary>
-        public bool IsCustomData { get; set; }
+        public bool? IsCustomData { get; set; }
 
         /// <summary>
         /// Gets or sets the source for the handedness attribute.

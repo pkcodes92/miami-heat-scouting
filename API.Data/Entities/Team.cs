@@ -2,7 +2,7 @@
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 
-namespace API.Entities
+namespace API.Data.Entities
 {
     /// <summary>
     /// This class represents the team entity.
@@ -18,11 +18,6 @@ namespace API.Entities
         /// Gets or sets the league key.
         /// </summary>
         public int? LeagueKey { get; set; }
-
-        /// <summary>
-        /// Gets or sets the league key for the domestic league.
-        /// </summary>
-        public int? LeagueKeyDomestic { get; set; }
 
         /// <summary>
         /// Gets or sets the arena key.
