@@ -33,5 +33,15 @@ namespace API.Data.Entities
         /// Gets or sets the date/time when the team player entity has been inserted.
         /// </summary>
         public DateTime InsertDateTime { get; set; }
+
+        /// <summary>
+        /// Gets or sets the relevant player entities.
+        /// </summary>
+        public virtual Player PlayerKeyNavigation { get; set; } = null!;
+
+        /// <summary>
+        /// Gets or sets the relevant team entities.
+        /// </summary>
+        public virtual Team TeamKeyNavigation { get; set; } = null!;
     }
 }
