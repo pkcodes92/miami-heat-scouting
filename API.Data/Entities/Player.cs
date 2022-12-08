@@ -110,7 +110,7 @@ namespace API.Data.Entities
         /// <summary>
         /// Gets or sets the url photo of the player.
         /// </summary>
-        public string URLPhoto { get; set; } = null!;
+        public string UrlPhoto { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets a value indicating whether or not the player is actively analyzed.
@@ -160,7 +160,7 @@ namespace API.Data.Entities
         /// <summary>
         /// Gets or sets the GLPlayerKey.
         /// </summary>
-        public int? GLPlayerKey { get; set; }
+        public int? GlPlayerKey { get; set; }
 
         /// <summary>
         /// Gets or sets the status key of the player.

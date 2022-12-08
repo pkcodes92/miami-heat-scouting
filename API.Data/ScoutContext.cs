@@ -149,6 +149,60 @@ namespace API.Data
                       .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.FirstName).IsRequired().HasMaxLength(50);
+                entity.Property(e => e.GlPlayerKey).HasColumnName("GLPlayerKey");
+                entity.Property(e => e.Hand).HasMaxLength(10);
+                entity.Property(e => e.HandLength).HasColumnType("decimal(5, 2)");
+
+                entity.Property(e => e.HandWHSource)
+                      .HasMaxLength(100)
+                      .HasColumnName("Hand_W_H_Source");
+
+                entity.Property(e => e.HandWidth).HasColumnType("decimal(5, 2)");
+                entity.Property(e => e.Handedness).HasMaxLength(10);
+
+                entity.Property(e => e.HandednessSource)
+                      .HasMaxLength(100)
+                      .HasColumnName("Handedness_Source");
+
+                entity.Property(e => e.Height).HasColumnType("decimal(6, 4)");
+
+                entity.Property(e => e.HeightSource)
+                      .HasMaxLength(100)
+                      .HasColumnName("Height_Source");
+
+                entity.Property(e => e.LastName)
+                      .IsRequired()
+                      .HasMaxLength(50);
+
+                entity.Property(e => e.StandingReach).HasColumnType("decimal(6, 4)");
+
+                entity.Property(e => e.StandingReachSource)
+                      .HasMaxLength(100)
+                      .HasColumnName("StandingReach_Source");
+
+                entity.Property(e => e.UrlPhoto)
+                      .HasMaxLength(250)
+                      .HasColumnName("URLPhoto");
+
+                entity.Property(e => e.VerticalJumpMax).HasColumnType("decimal(6, 4)");
+
+                entity.Property(e => e.VerticalJumpMaxSource)
+                      .HasMaxLength(100)
+                      .HasColumnName("VerticalJumpMax_Source");
+
+                entity.Property(e => e.VerticalJumpNoStep).HasColumnType("decimal(6, 4)");
+
+                entity.Property(e => e.Weight).HasColumnType("decimal(6, 2)");
+
+                entity.Property(e => e.WeightSource)
+                      .HasMaxLength(100)
+                      .HasColumnName("Weight_Source");
+
+                entity.Property(e => e.Wing).HasColumnType("decimal(6, 4)");
+
+                entity.Property(e => e.WingSource)
+                      .HasMaxLength(100)
+                      .HasColumnName("Wing_Source");
             });
 
             modelBuilder.Entity<TeamPlayer>(entity =>
