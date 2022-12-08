@@ -69,10 +69,14 @@ namespace API.Data
             modelBuilder.Entity<League>(entity =>
             {
                 entity.HasKey(e => e.LeagueKey);
+
                 entity.Property(e => e.LeagueKey).ValueGeneratedNever();
                 entity.Property(e => e.Country).HasMaxLength(100);
                 entity.Property(e => e.LeagueName).HasMaxLength(100);
-                entity.Property(e => e.SearchDisplayFlag).IsRequired().HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.SearchDisplayFlag)
+                      .IsRequired()
+                      .HasDefaultValueSql("((1))");
             });
 
             modelBuilder.Entity<Team>(entity =>
@@ -83,14 +87,21 @@ namespace API.Data
                 entity.Property(e => e.TeamKey).ValueGeneratedNever();
                 entity.Property(e => e.CoachName).HasMaxLength(100);
                 entity.Property(e => e.Conference).HasMaxLength(100);
-                entity.Property(e => e.CurrentNBATeamFlag).HasColumnName("CurrentNBATeamFlg").HasDefaultValue("((0))");
+
+                entity.Property(e => e.CurrentNBATeamFlag)
+                      .HasColumnName("CurrentNBATeamFlg")
+                      .HasDefaultValue("((0))");
+
                 entity.Property(e => e.LeagueKeyDomestic).HasColumnName("LeagueKey_Domestic");
                 entity.Property(e => e.SubConference).HasMaxLength(100);
                 entity.Property(e => e.TeamCity).HasMaxLength(100);
                 entity.Property(e => e.TeamCountry).HasMaxLength(100);
                 entity.Property(e => e.TeamName).IsRequired().HasMaxLength(50);
                 entity.Property(e => e.TeamNickname).HasMaxLength(100);
-                entity.Property(e => e.UrlPhoto).HasMaxLength(250).HasColumnName("URLPhoto");
+
+                entity.Property(e => e.UrlPhoto)
+                      .HasMaxLength(250)
+                      .HasColumnName("URLPhoto");
 
                 entity.HasOne(d => d.LeagueKeyNavigation)
                       .WithMany(p => p.TeamLeagueKeyNavigation)
@@ -112,15 +123,41 @@ namespace API.Data
                 entity.Property(e => e.AgentPhone).HasMaxLength(50);
                 entity.Property(e => e.BirthDate).HasColumnType("date");
                 entity.Property(e => e.BodyFat).HasColumnType("decimal(5, 2)");
-                entity.Property(e => e.BodyFatSource).HasMaxLength(100).HasColumnName("BodyFat_Source");
+
+                entity.Property(e => e.BodyFatSource)
+                      .HasMaxLength(100)
+                      .HasColumnName("BodyFat_Source");
+
                 entity.Property(e => e.CommittedTo).HasMaxLength(200);
-                entity.Property(e => e.CourtRunTime).HasColumnType("decimal(5, 2)").HasColumnName("CourtRunTime_3_4");
+
+                entity.Property(e => e.CourtRunTime)
+                      .HasColumnType("decimal(5, 2)")
+                      .HasColumnName("CourtRunTime_3_4");
+
+                entity.Property(e => e.CourtRunTimeSource)
+                      .HasMaxLength(100)
+                      .HasColumnName("CourtRunTime_3_4_Source");
+
+                entity.Property(e => e.InsertDateTime)
+                      .HasColumnType("datetime")
+                      .HasColumnName("dwh_insert_datetime")
+                      .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.UpdateDateTime)
+                      .HasColumnType("datetime")
+                      .HasColumnName("dwh_update_datetime")
+                      .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.FirstName).IsRequired().HasMaxLength(50);
             });
 
             modelBuilder.Entity<TeamPlayer>(entity =>
             {
                 entity.HasKey(e => new { e.PlayerKey, e.TeamKey, e.SeasonKey });
-                entity.Property(e => e.InsertDateTime).HasColumnType("datetime").HasColumnName("dwh_insert_datetime").HasDefaultValueSql("(getdate())");
+                entity.Property(e => e.InsertDateTime)
+                      .HasColumnType("datetime")
+                      .HasColumnName("dwh_insert_datetime")
+                      .HasDefaultValueSql("(getdate())");
 
                 entity.HasOne(d => d.PlayerKeyNavigation)
                       .WithMany(p => p.TeamPlayers)
@@ -137,15 +174,28 @@ namespace API.Data
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.ToTable("User", "dbo");
+                entity.HasKey(e => e.AzureAdUserId).HasName("PK__User__76BABBB6FEEB0689");
 
-                entity.HasKey(e => e.AzureAdUserId).HasName("PK__User__76BABBB6FDC4FAD9");
-                entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
-                entity.Property(e => e.Email).IsRequired().HasMaxLength(100);
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-                entity.Property(e => e.ModifiedDate).HasColumnType("datetime");
-                entity.Property(e => e.ActiveFlag).HasColumnType("bit");
-                entity.Property(e => e.Order).HasColumnType("int").IsRequired(false);
+                entity.Property(e => e.ActiveFlag)
+                      .IsRequired()
+                      .HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.CreatedDate)
+                      .HasColumnType("datetime")
+                      .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Email)
+                      .IsRequired().HasMaxLength(100)
+                      .IsUnicode(false);
+
+                entity.Property(e => e.ModifiedDate)
+                      .HasColumnType("datetime")
+                      .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Name)
+                      .IsRequired()
+                      .HasMaxLength(100)
+                      .IsUnicode(false);
             });
 
             modelBuilder.Entity<ScoutingReport>(entity =>
@@ -153,16 +203,33 @@ namespace API.Data
                 entity.ToTable("ScoutingReport", "dbo");
 
                 entity.HasKey(e => e.ScoutingReportKey).HasName("PK_ScoutingReport");
-                entity.Property(e => e.ScoutId).IsRequired().HasColumnType("nvarchar").HasMaxLength(450);
+                entity.Property(e => e.ScoutId)
+                      .IsRequired()
+                      .HasColumnType("nvarchar")
+                      .HasMaxLength(450);
+
                 entity.Property(e => e.PlayerKey).HasColumnType("int");
                 entity.Property(e => e.TeamKey).HasColumnType("int");
-                entity.Property(e => e.Defense).HasColumnType("int").HasColumnName("DefenseRating");
-                entity.Property(e => e.Rebound).HasColumnType("int").HasColumnName("ReboundRating");
+
+                entity.Property(e => e.Defense)
+                      .HasColumnType("int")
+                      .HasColumnName("DefenseRating");
+
+                entity.Property(e => e.Rebound)
+                      .HasColumnType("int")
+                      .HasColumnName("ReboundRating");
+
                 entity.Property(e => e.Shooting).HasColumnType("int").HasColumnName("ShootingRating");
                 entity.Property(e => e.Assist).HasColumnType("int").HasColumnName("AssistRating");
                 entity.Property(e => e.Comments).HasColumnType("varchar");
-                entity.Property(e => e.Created).HasColumnType("datetime").HasDefaultValueSql("(getdate())");
-                entity.Property(e => e.IsCurrent).HasColumnType("bit").HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Created)
+                      .HasColumnType("datetime")
+                      .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.IsCurrent)
+                      .HasColumnType("bit")
+                      .HasDefaultValueSql("((1))");
             });
 
             this.OnModelCreatingPartial(modelBuilder);
