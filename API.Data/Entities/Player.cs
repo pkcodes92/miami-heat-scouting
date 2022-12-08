@@ -10,6 +10,14 @@ namespace API.Data.Entities
     public partial class Player
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="Player"/> class.
+        /// </summary>
+        public Player()
+        {
+            this.TeamPlayers = new HashSet<TeamPlayer>();
+        }
+
+        /// <summary>
         /// Gets or sets the primary key of the player entity.
         /// </summary>
         public int PlayerKey { get; set; }
@@ -27,7 +35,7 @@ namespace API.Data.Entities
         /// <summary>
         /// Gets or sets the birth date of the player.
         /// </summary>
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         /// <summary>
         /// Gets or sets the position of the player.
@@ -218,5 +226,10 @@ namespace API.Data.Entities
         /// Gets or sets the source for the handedness attribute.
         /// </summary>
         public string HandednessSource { get; set; } = null!;
+
+        /// <summary>
+        /// Gets or sets the relevant TeamPlayer entities.
+        /// </summary>
+        public virtual ICollection<TeamPlayer> TeamPlayers { get; set; } = null!;
     }
 }
