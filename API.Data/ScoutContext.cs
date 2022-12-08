@@ -84,19 +84,18 @@ namespace API.Data
                 entity.ToTable("Team", "dbo");
 
                 entity.HasKey(e => e.TeamKey).HasName("PK_Team").IsClustered(true);
-                entity.HasKey(e => e.LeagueKeyDomestic).HasName("FK_Team_LeagueDomestic");
+                entity.HasKey(e => e.LeagueKey).HasName("FK_Team_League");
 
                 entity.Property(e => e.ArenaKey).IsRequired(false).HasColumnType("int");
-                entity.Property(e => e.TeamName).IsRequired().HasMaxLength(50);
-                entity.Property(e => e.TeamNickname).HasMaxLength(100);
+                entity.Property(e => e.TeamName).IsRequired(false).HasMaxLength(50);
+                entity.Property(e => e.TeamNickname).IsRequired(false).HasMaxLength(100);
                 entity.Property(e => e.Conference).IsRequired(false).HasMaxLength(100);
                 entity.Property(e => e.SubConference).IsRequired(false).HasMaxLength(100);
-                entity.Property(e => e.TeamCity).HasMaxLength(100);
-                entity.Property(e => e.TeamCountry).HasMaxLength(100);
+                entity.Property(e => e.TeamCity).IsRequired(false).HasMaxLength(100);
+                entity.Property(e => e.TeamCountry).IsRequired(false).HasMaxLength(100);
                 entity.Property(e => e.CoachName).IsRequired(false).HasMaxLength(100);
-                entity.Property(e => e.URLPhoto).HasMaxLength(250);
+                entity.Property(e => e.URLPhoto).IsRequired(false).HasMaxLength(250);
                 entity.Property(e => e.CurrentNBATeamFlag).HasColumnName("CurrentNBATeamFlg").HasDefaultValueSql("((0))");
-                entity.Property(e => e.LeagueKeyDomestic).HasColumnType("int").HasColumnName("LeagueKey_Domestic");
             });
 
             modelBuilder.Entity<Player>(entity =>
