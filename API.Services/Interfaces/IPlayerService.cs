@@ -12,7 +12,7 @@ namespace API.Services.Interfaces
     public interface IPlayerService
     {
         /// <summary>
-        /// This method definition retrieves a player by first and last name.
+        /// Retrieves a player by first and last name.
         /// </summary>
         /// <param name="firstName">The first name of the player to find.</param>
         /// <param name="lastName">The last name of the player to find.</param>
@@ -20,7 +20,7 @@ namespace API.Services.Interfaces
         Task<Player> GetPlayerByFirstAndLastNameAsync(string firstName, string lastName);
 
         /// <summary>
-        /// This method definition retrieves all the players from the database.
+        /// Retrieves all the players.
         /// </summary>
         /// <returns>A list of type <see cref="Player"/>.</returns>
         Task<List<Player>> GetAllPlayersAsync();

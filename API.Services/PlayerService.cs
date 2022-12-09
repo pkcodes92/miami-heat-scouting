@@ -27,7 +27,7 @@ namespace API.Services
         }
 
         /// <summary>
-        /// This method implementation will get all of the players.
+        /// Retrieves all the players.
         /// </summary>
         /// <returns>A list of the players.</returns>
         public async Task<List<Player>> GetAllPlayersAsync()
@@ -44,7 +44,7 @@ namespace API.Services
         }
 
         /// <summary>
-        /// Gets a single player from the database based on the first and last name.
+        /// Retrieves a single player based on first and last name.
         /// </summary>
         /// <param name="firstName">The first name of the player.</param>
         /// <param name="lastName">The last name of the player.</param>

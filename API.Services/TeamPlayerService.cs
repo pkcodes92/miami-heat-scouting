@@ -25,7 +25,7 @@ namespace API.Services
         }
 
         /// <summary>
-        /// This method returns the team players by the season.
+        /// Retrieves the team players in a season.
         /// </summary>
         /// <param name="season">The season to search.</param>
         /// <returns>A list of team player entities.</returns>
@@ -41,7 +41,7 @@ namespace API.Services
         }
 
         /// <summary>
-        /// This method returns the team player by the player primary key and season.
+        /// Retrieves a team player by the player key and season.
         /// </summary>
         /// <param name="playerKey">The player primary key.</param>
         /// <param name="season">The season to search.</param>
