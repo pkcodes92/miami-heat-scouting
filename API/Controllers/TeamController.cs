@@ -14,7 +14,7 @@ namespace API.Controllers
     /// This class represents all of the CRUD operations to be performed with the <see cref="Team"/> model.
     /// </summary>
     [ApiController]
-    [Route("Team")]
+    [Route("[controller]")]
     public class TeamController : ControllerBase
     {
         private readonly TelemetryClient telemetryClient;

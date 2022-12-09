@@ -83,9 +83,12 @@ namespace API
             services.AddTransient<IScoutingReportRepository, ScoutingReportRepository>();
             services.AddTransient<IPlayerRepository, PlayerRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ITeamPlayerRepository, TeamPlayerRepository>();
 
             services.AddTransient<ITeamsService, TeamsService>();
             services.AddTransient<IScoutingReportService, ScoutingReportService>();
+            services.AddTransient<ITeamPlayerService, TeamPlayerService>();
+            services.AddTransient<IPlayerService, PlayerService>();
         }
 
         /// <summary>

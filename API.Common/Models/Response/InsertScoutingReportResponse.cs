@@ -6,6 +6,9 @@ namespace API.Common.Models.Response
 {
     using Newtonsoft.Json;
 
+    /// <summary>
+    /// This class represents the response after a new scouting report is inserted into the database.
+    /// </summary>
     public class InsertScoutingReportResponse : ApiResponse
     {
         /// <summary>

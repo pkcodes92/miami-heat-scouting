@@ -38,7 +38,7 @@ namespace API.Data.Repository
         /// <summary>
         /// This method will get a scouting report by the team.
         /// </summary>
-        /// <param name="teamKey">The team primary key</param>
+        /// <param name="teamKey">The team primary key.</param>
         /// <returns>A list of scouting reports.</returns>
         public async Task<List<ScoutingReport>> GetScoutingReportsByTeamAsync(int teamKey)
         {

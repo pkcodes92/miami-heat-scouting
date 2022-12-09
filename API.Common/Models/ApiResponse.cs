@@ -6,6 +6,9 @@ namespace API.Common.Models
 {
     using Newtonsoft.Json;
 
+    /// <summary>
+    /// This class represents the generic API response.
+    /// </summary>
     public class ApiResponse
     {
         /// <summary>

@@ -18,7 +18,7 @@ namespace API.Controllers
     /// This controller will have all the API methods for the <see cref="ScoutingReport"/> entity.
     /// </summary>
     [ApiController]
-    [Route("Scout")]
+    [Route("[controller]")]
     public class ScoutingReportController : ControllerBase
     {
         private readonly TelemetryClient telemetryClient;
@@ -39,15 +39,15 @@ namespace API.Controllers
         /// <summary>
         /// This will add a new scouting report to the database accordingly.
         /// </summary>
-        /// <param name="incomingScoutingReport">The information required to add the new scouting report to the database.</param>
+        /// <param name="newScoutingReport">The information required to add the new scouting report to the database.</param>
         /// <returns>A unit of execution that contains an action result.</returns>
         [HttpPost]
         [Route("AddNewScoutingReport")]
-        public async Task<ActionResult> AddNewScoutingReportAsync(IncomingScoutingReport incomingScoutingReport)
+        public async Task<ActionResult> AddNewScoutingReportAsync(IncomingScoutingReport newScoutingReport)
         {
             InsertScoutingReportResponse apiResponse;
 
-            var validationResult = this.validator.Validate(incomingScoutingReport);
+            var validationResult = this.validator.Validate(newScoutingReport);
 
             if (!validationResult.IsValid)
             {
@@ -66,7 +66,7 @@ namespace API.Controllers
 
             try
             {
-                var scoutingReportId = await this.scoutingReportService.InsertScoutingReportAsync(incomingScoutingReport);
+                var scoutingReportId = await this.scoutingReportService.InsertScoutingReportAsync(newScoutingReport);
                 apiResponse = new InsertScoutingReportResponse
                 {
                     ScoutingReportId = scoutingReportId,

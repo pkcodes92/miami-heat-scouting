@@ -2,10 +2,10 @@
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 
-using Newtonsoft.Json;
-
 namespace API.Common.DTO
 {
+    using Newtonsoft.Json;
+
     /// <summary>
     /// This class will get the necessary scouting report.
     /// </summary>
@@ -48,7 +48,7 @@ namespace API.Common.DTO
         public string Comments { get; set; } = null!;
 
         /// <summary>
-        /// Gets or sets a value indicating if the scouting report is active.
+        /// Gets or sets a value indicating whether if the scouting report is active.
         /// </summary>
         [JsonProperty("isActive")]
         public bool IsActive { get; set; }

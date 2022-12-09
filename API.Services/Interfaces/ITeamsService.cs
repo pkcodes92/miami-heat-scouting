@@ -22,5 +22,12 @@ namespace API.Services.Interfaces
         /// </summary>
         /// <returns>A list of all the teams in the database.</returns>
         Task<List<Team>> GetAllTeamsAsync();
+
+        /// <summary>
+        /// This method definition will get the team by the primary key.
+        /// </summary>
+        /// <param name="teamKey">The primary key of the team entity.</param>
+        /// <returns>A single team entity.</returns>
+        Task<Team> GetTeamByKeyAsync(int teamKey);
     }
 }

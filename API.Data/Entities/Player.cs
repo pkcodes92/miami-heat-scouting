@@ -140,22 +140,22 @@ namespace API.Data.Entities
         /// <summary>
         /// Gets or sets the name of the agent.
         /// </summary>
-        public string AgentName { get; set; } = null!;
+        public string? AgentName { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the phone number of the agent.
         /// </summary>
-        public string AgentPhone { get; set; } = null!;
+        public string? AgentPhone { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets which organization there is a commitment made towards.
         /// </summary>
-        public string CommittedTo { get; set; } = null!;
+        public string? CommittedTo { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the handedness of the player.
         /// </summary>
-        public string Handedness { get; set; } = null!;
+        public string? Handedness { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the GLPlayerKey.
@@ -170,52 +170,52 @@ namespace API.Data.Entities
         /// <summary>
         /// Gets or sets the height source.
         /// </summary>
-        public string HeightSource { get; set; } = null!;
+        public string? HeightSource { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the weight source.
         /// </summary>
-        public string WeightSource { get; set; } = null!;
+        public string? WeightSource { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the wingspan source.
         /// </summary>
-        public string WingSource { get; set; } = null!;
+        public string? WingSource { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the source for the player's body fat content.
         /// </summary>
-        public string BodyFatSource { get; set; } = null!;
+        public string? BodyFatSource { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the source for the standing reach.
         /// </summary>
-        public string StandingReachSource { get; set; } = null!;
+        public string? StandingReachSource { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the source for the court run time.
         /// </summary>
-        public string CourtRunTimeSource { get; set; } = null!;
+        public string? CourtRunTimeSource { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the source for the vertical jump.
         /// </summary>
-        public string VerticalJumpNoStepSource { get; set; } = null!;
+        public string? VerticalJumpNoStepSource { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the source for the max vertical jump.
         /// </summary>
-        public string VerticalJumpMaxSource { get; set; } = null!;
+        public string? VerticalJumpMaxSource { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the source for the hand information, height, and weight.
         /// </summary>
-        public string HandWHSource { get; set; } = null!;
+        public string? HandWHSource { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the hand.
         /// </summary>
-        public string Hand { get; set; } = null!;
+        public string? Hand { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets a value indicating whether the data being provided is a custom data.
@@ -225,7 +225,7 @@ namespace API.Data.Entities
         /// <summary>
         /// Gets or sets the source for the handedness attribute.
         /// </summary>
-        public string HandednessSource { get; set; } = null!;
+        public string? HandednessSource { get; set; } = null!;
 
         /// <summary>
         /// Gets or sets the relevant TeamPlayer entities.

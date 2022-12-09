@@ -1,4 +1,4 @@
-﻿// <copyright file="Scout.cs" company="Miami Heat">
+﻿// <copyright file="User.cs" company="Miami Heat">
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 
