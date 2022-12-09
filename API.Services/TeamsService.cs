@@ -36,6 +36,7 @@ namespace API.Services
         /// <returns>The list of NBA teams.</returns>
         public async Task<List<Team>> GetActiveTeamsAsync()
         {
+            this.telemetryClient.TrackTrace("TeamsService - GetActiveTeamsAsync called");
             List<Team> teamsToReturn;
 
             try
@@ -43,15 +44,17 @@ namespace API.Services
                 var dbTeams = await this.teamRepository.GetAllActiveTeamsAsync();
                 teamsToReturn = dbTeams.Select(x => new Team
                 {
-                     CoachName = x.CoachName,
-                     Conference = x.Conference,
-                     Division = x.SubConference,
-                     TeamCity = x.TeamCity,
-                     TeamCountry = x.TeamCountry,
-                     TeamKey = x.TeamKey,
-                     TeamName = x.TeamName,
-                     TeamNickname = x.TeamNickname,
+                     CoachName = x.CoachName!,
+                     Conference = x.Conference!,
+                     Division = x.SubConference!,
+                     TeamCity = x.TeamCity!,
+                     TeamCountry = x.TeamCountry!,
+                     TeamId = x.TeamKey,
+                     TeamName = x.TeamName!,
+                     TeamNickname = x.TeamNickname!,
                 }).ToList();
+
+                this.telemetryClient.TrackTrace($"Returned: {teamsToReturn.Count} results");
             }
             catch (Exception ex)
             {
@@ -68,6 +71,7 @@ namespace API.Services
         /// <returns>A list of all the teams.</returns>
         public async Task<List<Team>> GetAllTeamsAsync()
         {
+            this.telemetryClient.TrackTrace("TeamsService - GetAllTeamsAsync called");
             List<Team> teamsToReturn;
 
             try
@@ -75,15 +79,17 @@ namespace API.Services
                 var dbTeams = await this.teamRepository.GetAllTeamsAsync();
                 teamsToReturn = dbTeams.Select(x => new Team
                 {
-                    CoachName = x.CoachName,
-                    Conference = x.Conference,
-                    Division = x.SubConference,
-                    TeamCity = x.TeamCity,
-                    TeamCountry = x.TeamCountry,
-                    TeamKey = x.TeamKey,
-                    TeamName = x.TeamName,
-                    TeamNickname = x.TeamNickname,
+                    CoachName = x.CoachName!,
+                    Conference = x.Conference!,
+                    Division = x.SubConference!,
+                    TeamCity = x.TeamCity!,
+                    TeamCountry = x.TeamCountry!,
+                    TeamId = x.TeamKey,
+                    TeamName = x.TeamName!,
+                    TeamNickname = x.TeamNickname!,
                 }).ToList();
+
+                this.telemetryClient.TrackTrace($"Returned {teamsToReturn.Count} teams");
             }
             catch (Exception ex)
             {
@@ -92,6 +98,31 @@ namespace API.Services
             }
 
             return teamsToReturn;
+        }
+
+        /// <summary>
+        /// This method implementation returns a single team by looking up the primary key.
+        /// </summary>
+        /// <param name="teamKey">The primary key of the team entity.</param>
+        /// <returns>A single team.</returns>
+        public async Task<Team> GetTeamByKeyAsync(int teamKey)
+        {
+            Team teamToReturn;
+            var dbTeam = await this.teamRepository.GetTeamByKeyAsync(teamKey);
+
+            teamToReturn = new Team
+            {
+                CoachName = dbTeam.CoachName!,
+                Conference = dbTeam.Conference!,
+                Division = dbTeam.SubConference!,
+                TeamCity = dbTeam.TeamCity!,
+                TeamCountry = dbTeam.TeamCountry!,
+                TeamId = dbTeam.TeamKey,
+                TeamName = dbTeam.TeamName!,
+                TeamNickname = dbTeam.TeamNickname!,
+            };
+
+            return teamToReturn;
         }
     }
 }

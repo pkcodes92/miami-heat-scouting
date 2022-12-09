@@ -35,5 +35,15 @@ namespace API.Data.Repository
             var result = await this.scoutCountext.Players.FirstOrDefaultAsync(x => x.FirstName == firstName && x.LastName == lastName);
             return result!;
         }
+
+        /// <summary>
+        /// This method implementation retrieves all the players from the database.
+        /// </summary>
+        /// <returns>A list of type <see cref="Player"/>.</returns>
+        public async Task<List<Player>> GetAllPlayersAsync()
+        {
+            var result = await this.scoutCountext.Players.ToListAsync();
+            return result;
+        }
     }
 }

@@ -18,5 +18,11 @@ namespace API.Services.Interfaces
         /// <param name="lastName">The last name of the player to find.</param>
         /// <returns>A result of type <see cref="Player"/>.</returns>
         Task<Player> GetPlayerByFirstAndLastNameAsync(string firstName, string lastName);
+
+        /// <summary>
+        /// This method definition retrieves all the players from the database.
+        /// </summary>
+        /// <returns>A list of type <see cref="Player"/>.</returns>
+        Task<List<Player>> GetAllPlayersAsync();
     }
 }

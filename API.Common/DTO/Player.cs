@@ -28,5 +28,14 @@ namespace API.Common.DTO
         /// Gets or sets the birth date of the player.
         /// </summary>
         public DateTime BirthDate { get; set; }
+
+        /// <summary>
+        /// This method returns the full name of the player.
+        /// </summary>
+        /// <returns>The full name of the player.</returns>
+        public string GetFullName()
+        {
+            return this.FirstName + " " + this.LastName;
+        }
     }
 }

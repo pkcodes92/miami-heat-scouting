@@ -18,5 +18,11 @@ namespace API.Data.Repository.Interfaces
         /// <param name="lastName">The player's last name.</param>
         /// <returns>A unit of execution containing the player being returned.</returns>
         Task<Player> GetPlayerByFirstAndLastNameAsync(string firstName, string lastName);
+
+        /// <summary>
+        /// This method definition will get all the players from the database.
+        /// </summary>
+        /// <returns>A list of the type <see cref="Player"/>.</returns>
+        Task<List<Player>> GetAllPlayersAsync();
     }
 }

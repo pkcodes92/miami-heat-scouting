@@ -121,6 +121,7 @@ namespace API.Data
                 entity.HasKey(e => e.PlayerKey);
 
                 entity.Property(e => e.PlayerKey).ValueGeneratedNever();
+                entity.Property(e => e.ActiveAnalysisFlag).HasColumnName("ActiveAnalysisFlg");
                 entity.Property(e => e.AgentName).HasMaxLength(200);
                 entity.Property(e => e.AgentPhone).HasMaxLength(50);
                 entity.Property(e => e.BirthDate).HasColumnType("date");
@@ -194,6 +195,10 @@ namespace API.Data
 
                 entity.Property(e => e.VerticalJumpNoStep).HasColumnType("decimal(6, 4)");
 
+                entity.Property(e => e.VerticalJumpNoStepSource)
+                      .HasMaxLength(100)
+                      .HasColumnName("VerticalJumpNoStep_Source");
+
                 entity.Property(e => e.Weight).HasColumnType("decimal(6, 2)");
 
                 entity.Property(e => e.WeightSource)
@@ -211,6 +216,9 @@ namespace API.Data
             {
                 entity.ToTable("TeamPlayer", "dbo");
                 entity.HasKey(e => new { e.PlayerKey, e.TeamKey, e.SeasonKey });
+
+                entity.Property(e => e.ActiveTeamFlag).HasColumnName("ActiveTeamFlg");
+
                 entity.Property(e => e.InsertDateTime)
                       .HasColumnType("datetime")
                       .HasColumnName("dwh_insert_datetime")

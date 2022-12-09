@@ -4,6 +4,7 @@
 
 namespace API.Services
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using API.Common.DTO;
     using API.Data.Repository.Interfaces;
@@ -23,6 +24,23 @@ namespace API.Services
         public PlayerService(IPlayerRepository playerRepository)
         {
             this.playerRepository = playerRepository;
+        }
+
+        /// <summary>
+        /// This method implementation will get all of the players.
+        /// </summary>
+        /// <returns>A list of the players.</returns>
+        public async Task<List<Player>> GetAllPlayersAsync()
+        {
+            var dbPlayers = await this.playerRepository.GetAllPlayersAsync();
+
+            return dbPlayers.Select(p => new Player
+            {
+                BirthDate = (DateTime)p.BirthDate!,
+                FirstName = p.FirstName,
+                LastName = p.LastName,
+                PlayerId = p.PlayerKey,
+            }).ToList();
         }
 
         /// <summary>
