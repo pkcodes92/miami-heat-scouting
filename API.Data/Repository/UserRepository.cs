@@ -25,7 +25,7 @@ namespace API.Data.Repository
         }
 
         /// <summary>
-        /// This method will retrieve the user by the name from the database.
+        /// Retrieves the user by the name from the database.
         /// </summary>
         /// <param name="name">The name of the user.</param>
         /// <returns>A single user which is having the data being entered.</returns>

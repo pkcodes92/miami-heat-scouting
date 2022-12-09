@@ -7,7 +7,7 @@ namespace API.Data.Repository.Interfaces
     using API.Data.Entities;
 
     /// <summary>
-    /// This interface defines the methods to be performed with the <see cref="Team"/> entity.
+    /// This interface defines the CRUD operations to be performed on the <see cref="Team"/> entity.
     /// </summary>
     public interface ITeamRepository
     {

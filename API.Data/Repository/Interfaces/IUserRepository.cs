@@ -7,7 +7,7 @@ namespace API.Data.Repository.Interfaces
     using API.Data.Entities;
 
     /// <summary>
-    /// This interface defines all of the methods for the <see cref="User"/> entity.
+    /// This interface defines the CRUD operations to be performed on the <see cref="User"/> entity.
     /// </summary>
     public interface IUserRepository
     {
