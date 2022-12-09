@@ -31,7 +31,7 @@ namespace API.Services
         }
 
         /// <summary>
-        /// This method returns a list of all the active teams.
+        /// Retrieves the active teams.
         /// </summary>
         /// <returns>The list of NBA teams.</returns>
         public async Task<List<Team>> GetActiveTeamsAsync()
@@ -49,9 +49,9 @@ namespace API.Services
                      Division = x.SubConference!,
                      TeamCity = x.TeamCity!,
                      TeamCountry = x.TeamCountry!,
-                     TeamId = x.TeamKey,
                      TeamName = x.TeamName!,
                      TeamNickname = x.TeamNickname!,
+                     TeamKey = x.TeamKey!,
                 }).ToList();
 
                 this.telemetryClient.TrackTrace($"Returned: {teamsToReturn.Count} results");
@@ -66,7 +66,7 @@ namespace API.Services
         }
 
         /// <summary>
-        /// This method implementation returns all of the teams in the database.
+        /// Retrieves all teams in the database.
         /// </summary>
         /// <returns>A list of all the teams.</returns>
         public async Task<List<Team>> GetAllTeamsAsync()
@@ -84,7 +84,7 @@ namespace API.Services
                     Division = x.SubConference!,
                     TeamCity = x.TeamCity!,
                     TeamCountry = x.TeamCountry!,
-                    TeamId = x.TeamKey,
+                    TeamKey = x.TeamKey,
                     TeamName = x.TeamName!,
                     TeamNickname = x.TeamNickname!,
                 }).ToList();
@@ -101,7 +101,7 @@ namespace API.Services
         }
 
         /// <summary>
-        /// This method implementation returns a single team by looking up the primary key.
+        /// Retrieves a single team by looking up the primary key.
         /// </summary>
         /// <param name="teamKey">The primary key of the team entity.</param>
         /// <returns>A single team.</returns>
@@ -117,7 +117,7 @@ namespace API.Services
                 Division = dbTeam.SubConference!,
                 TeamCity = dbTeam.TeamCity!,
                 TeamCountry = dbTeam.TeamCountry!,
-                TeamId = dbTeam.TeamKey,
+                TeamKey = dbTeam.TeamKey,
                 TeamName = dbTeam.TeamName!,
                 TeamNickname = dbTeam.TeamNickname!,
             };

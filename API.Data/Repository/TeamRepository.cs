@@ -25,7 +25,7 @@ namespace API.Data.Repository
         }
 
         /// <summary>
-        /// This method definition will get all of the active teams in the database.
+        /// Retrieves the active teams from the database.
         /// </summary>
         /// <returns>A list of the team entity.</returns>
         public async Task<List<Team>> GetAllActiveTeamsAsync()
@@ -35,7 +35,7 @@ namespace API.Data.Repository
         }
 
         /// <summary>
-        /// This method definition will get all of the teams from the database.
+        /// Retrieves all of the teams from the database.
         /// </summary>
         /// <returns>A list of the team entity.</returns>
         public async Task<List<Team>> GetAllTeamsAsync()
@@ -45,7 +45,7 @@ namespace API.Data.Repository
         }
 
         /// <summary>
-        /// This method will get the team by the team key.
+        /// Retrieves the team by the primary key.
         /// </summary>
         /// <param name="teamKey">The primary key of the team entity.</param>
         /// <returns>A single team to return.</returns>
@@ -56,7 +56,7 @@ namespace API.Data.Repository
         }
 
         /// <summary>
-        /// This method will return a team by the name and city.
+        /// Retrieves a team by the name and city.
         /// </summary>
         /// <param name="teamName">The team name.</param>
         /// <param name="teamCity">The team city.</param>
@@ -68,7 +68,7 @@ namespace API.Data.Repository
         }
 
         /// <summary>
-        /// This method definition will return the necessary primary key of the team.
+        /// Inserts a new team into the database.
         /// </summary>
         /// <param name="team">The team entity being added to the database.</param>
         /// <returns>The primary key of the team entity.</returns>

@@ -11,7 +11,7 @@ namespace API.Data.Repository
     using Microsoft.EntityFrameworkCore;
 
     /// <summary>
-    /// This class will implement the methods defined in <see cref="ITeamPlayerRepository"/>.
+    /// This class implements the methods defined in <see cref="ITeamPlayerRepository"/>.
     /// </summary>
     public class TeamPlayerRepository : ITeamPlayerRepository
     {
@@ -40,7 +40,7 @@ namespace API.Data.Repository
         }
 
         /// <summary>
-        /// This method implementation gets all of the team players in a given season.
+        /// Retrieves all of the team players in a given season.
         /// </summary>
         /// <param name="season">The season to search for players.</param>
         /// <returns>A list of type <see cref="TeamPlayer"/>.</returns>

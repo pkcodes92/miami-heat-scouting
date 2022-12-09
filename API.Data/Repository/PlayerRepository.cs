@@ -25,7 +25,7 @@ namespace API.Data.Repository
         }
 
         /// <summary>
-        /// This method implementation retrieves a player by their name.
+        /// Retrieves a player by their name.
         /// </summary>
         /// <param name="firstName">The first name of the player.</param>
         /// <param name="lastName">The last name of the player.</param>
@@ -37,7 +37,7 @@ namespace API.Data.Repository
         }
 
         /// <summary>
-        /// This method implementation retrieves all the players from the database.
+        /// Retrieves all the players from the database.
         /// </summary>
         /// <returns>A list of type <see cref="Player"/>.</returns>
         public async Task<List<Player>> GetAllPlayersAsync()

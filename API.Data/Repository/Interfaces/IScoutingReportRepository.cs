@@ -7,7 +7,7 @@ namespace API.Data.Repository.Interfaces
     using API.Data.Entities;
 
     /// <summary>
-    /// This interface defines the necessary operations to perform on the <see cref="ScoutingReport"/> entity.
+    /// This interface defines the CRUD operations to be performed on the <see cref="ScoutingReport"/> entity.
     /// </summary>
     public interface IScoutingReportRepository
     {

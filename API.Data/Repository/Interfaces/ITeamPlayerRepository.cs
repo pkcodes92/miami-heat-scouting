@@ -7,12 +7,12 @@ namespace API.Data.Repository.Interfaces
     using API.Data.Entities;
 
     /// <summary>
-    /// This interface defines all of the methods to be done for the <see cref="TeamPlayer"/> entity.
+    /// This interface defines the CRUD operations to be performed on the <see cref="TeamPlayer"/> entity.
     /// </summary>
     public interface ITeamPlayerRepository
     {
         /// <summary>
-        /// Retrieves all of the players in a season.
+        /// Retrieves all of the team player records in a season.
         /// </summary>
         /// <param name="season">The season to find the players.</param>
         /// <returns>A list of type <see cref="TeamPlayer"/>.</returns>

@@ -12,14 +12,14 @@ namespace API.Services.Interfaces
     public interface ITeamPlayerService
     {
         /// <summary>
-        /// Gets the necessary records per season.
+        /// Retrieves the team player records in a season.
         /// </summary>
         /// <param name="season">The season value.</param>
         /// <returns>A list of the type of <see cref="TeamPlayer"/>.</returns>
         Task<List<TeamPlayer>> GetTeamPlayersBySeasonAsync(int season);
 
         /// <summary>
-        /// Gets the necessary team player by the player ID and season.
+        /// Retrieves a single team player by player key in a season.
         /// </summary>
         /// <param name="playerKey">The primary key of the player entity.</param>
         /// <param name="season">The season to search for.</param>

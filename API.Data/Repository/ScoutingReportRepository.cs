@@ -25,7 +25,7 @@ namespace API.Data.Repository
         }
 
         /// <summary>
-        /// This method will return the scouting report by the primary key.
+        /// Retrieves the scouting report by the primary key.
         /// </summary>
         /// <param name="scoutingReportKey">The primary key.</param>
         /// <returns>A single scouting report entity.</returns>
@@ -36,7 +36,7 @@ namespace API.Data.Repository
         }
 
         /// <summary>
-        /// This method will get a scouting report by the team.
+        /// Retrieves scouting reports for a team.
         /// </summary>
         /// <param name="teamKey">The team primary key.</param>
         /// <returns>A list of scouting reports.</returns>
@@ -47,7 +47,7 @@ namespace API.Data.Repository
         }
 
         /// <summary>
-        /// This method will insert a new scouting report into the database.
+        /// Inserts a new scouting report into the database.
         /// </summary>
         /// <param name="scoutingReport">A scouting report to add.</param>
         /// <returns>The primary key of the scouting report entity.</returns>
@@ -60,7 +60,7 @@ namespace API.Data.Repository
         }
 
         /// <summary>
-        /// This method will return all of the scouting reports from the database.
+        /// Retrieves all of the scouting reports from the database.
         /// </summary>
         /// <returns>A list of the scouting reports.</returns>
         public async Task<List<ScoutingReport>> GetAllScoutingReportsAsync()

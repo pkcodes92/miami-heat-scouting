@@ -13,14 +13,14 @@ namespace API.Services.Interfaces
     public interface IScoutingReportService
     {
         /// <summary>
-        /// This method definition will insert a new scouting report into the database.
+        /// Inserts a new scouting report.
         /// </summary>
         /// <param name="newScoutingReport">A new scouting report.</param>
         /// <returns>A new scouting report being added.</returns>
         Task<int> InsertScoutingReportAsync(IncomingScoutingReport newScoutingReport);
 
         /// <summary>
-        /// This method definition will get all of the scouting reports from the database.
+        /// Retrieves all scouting reports.
         /// </summary>
         /// <returns>A list of all the scouting reports.</returns>
         Task<List<ScoutingReport>> GetAllScoutingReportsAsync();

@@ -38,7 +38,7 @@ namespace API.Services
         }
 
         /// <summary>
-        /// This method implementation will add a new scouting report to the database.
+        /// Inserts a new scouting report into the database.
         /// </summary>
         /// <param name="newScoutingReport">The incoming scouting report.</param>
         /// <returns>A unit of execution that contains a new scouting report.</returns>
@@ -72,7 +72,7 @@ namespace API.Services
         }
 
         /// <summary>
-        /// This method implementation gets all of the scouting reports in the database.
+        /// Retrieves all of the scouting reports.
         /// </summary>
         /// <returns>A list of scouting reports to return to the API.</returns>
         public async Task<List<ScoutingReport>> GetAllScoutingReportsAsync()

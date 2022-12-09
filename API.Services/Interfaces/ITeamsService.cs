@@ -12,19 +12,19 @@ namespace API.Services.Interfaces
     public interface ITeamsService
     {
         /// <summary>
-        /// This method definition returns all the active NBA teams.
+        /// Retrieves all the active teams.
         /// </summary>
         /// <returns>A list of the active teams.</returns>
         Task<List<Team>> GetActiveTeamsAsync();
 
         /// <summary>
-        /// This method definition will get all of the teams in the database.
+        /// Retrieves all teams.
         /// </summary>
         /// <returns>A list of all the teams in the database.</returns>
         Task<List<Team>> GetAllTeamsAsync();
 
         /// <summary>
-        /// This method definition will get the team by the primary key.
+        /// Retrieves a team by primary key.
         /// </summary>
         /// <param name="teamKey">The primary key of the team entity.</param>
         /// <returns>A single team entity.</returns>
