@@ -47,7 +47,7 @@ namespace API.Common.DTO
         /// <summary>
         /// Gets or sets the team key.
         /// </summary>
-        public int TeamId { get; set; }
+        public int TeamKey { get; set; }
 
         /// <summary>
         /// This method gets the full team name.
