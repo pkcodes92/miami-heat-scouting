@@ -43,5 +43,24 @@ namespace API.Services
                 IsScout = x.ActiveFlag,
             }).ToList();
         }
+
+        /// <summary>
+        /// This method returns a single user.
+        /// </summary>
+        /// <param name="name">The name of the user.</param>
+        /// <returns>A single user contained within a single unit of execution.</returns>
+        public async Task<User> GetUserAsync(string name)
+        {
+            var dbUser = await this.userRepository.GetUserByNameAsync(name);
+
+            var userToReturn = new User
+            {
+                Name = name,
+                Email = dbUser.Email,
+                IsScout = dbUser.ActiveFlag,
+            };
+
+            return userToReturn;
+        }
     }
 }

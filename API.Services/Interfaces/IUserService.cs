@@ -16,5 +16,12 @@ namespace API.Services.Interfaces
         /// </summary>
         /// <returns>A list of users.</returns>
         Task<List<User>> GetAllUsersAsync();
+
+        /// <summary>
+        /// Gets the user based on the name.
+        /// </summary>
+        /// <param name="name">The name of the user.</param>
+        /// <returns>A single user from the database.</returns>
+        Task<User> GetUserAsync(string name);
     }
 }

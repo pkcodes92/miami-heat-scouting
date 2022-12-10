@@ -23,6 +23,7 @@ namespace API.Controllers
     {
         private readonly TelemetryClient telemetryClient;
         private readonly IScoutingReportService scoutingReportService;
+        private readonly IUserService userService;
         private readonly IncomingScoutingReportValidator validator = new IncomingScoutingReportValidator();
 
         /// <summary>
@@ -30,10 +31,12 @@ namespace API.Controllers
         /// </summary>
         /// <param name="telemetryClient">The telemetry client injection.</param>
         /// <param name="scoutingReportService">The scouting report service injection.</param>
-        public ScoutingReportController(TelemetryClient telemetryClient, IScoutingReportService scoutingReportService)
+        /// <param name="userService">The user service injection.</param>
+        public ScoutingReportController(TelemetryClient telemetryClient, IScoutingReportService scoutingReportService, IUserService userService)
         {
             this.telemetryClient = telemetryClient;
             this.scoutingReportService = scoutingReportService;
+            this.userService = userService;
         }
 
         /// <summary>
@@ -41,8 +44,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="newScoutingReport">The information required to add the new scouting report to the database.</param>
         /// <returns>A unit of execution that contains an action result.</returns>
-        [HttpPost]
-        [Route("AddNewScoutingReport")]
+        [HttpPost("AddNewScoutingReport")]
         public async Task<ActionResult> AddNewScoutingReportAsync(IncomingScoutingReport newScoutingReport)
         {
             InsertScoutingReportResponse apiResponse;
@@ -93,8 +95,7 @@ namespace API.Controllers
         /// This method will be returning all of the scouting reports in the database.
         /// </summary>
         /// <returns>A unit of execution that contains an HTTP result.</returns>
-        [HttpGet]
-        [Route("GetAllScoutingReports")]
+        [HttpGet("GetAllScoutingReports")]
         public async Task<ActionResult> GetAllScoutingReportsAsync()
         {
             GetScoutingReportsResponse apiResponse;
@@ -110,6 +111,19 @@ namespace API.Controllers
             };
 
             return this.Ok(apiResponse);
+        }
+
+        /// <summary>
+        /// This method gets the scouting reports that were done by the name of the scout.
+        /// </summary>
+        /// <param name="scoutName">The name of the scout.</param>
+        /// <returns>A unit of execution that contains an HTTP result.</returns>
+        [HttpGet("GetScoutingReports/{scoutName}")]
+        public async Task<ActionResult> GetScoutingReportsByScoutAsync(string scoutName)
+        {
+            var scout = await this.userService.GetUserAsync(scoutName);
+
+            return this.Ok(scout);
         }
 
         private List<ValidationError> BuildValidationErrors(ValidationResult result)
