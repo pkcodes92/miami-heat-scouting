@@ -101,11 +101,11 @@ namespace API.Controllers
         [HttpGet("GetAllScoutingReports")]
         public async Task<ActionResult> GetAllScoutingReportsAsync()
         {
-            GetScoutingReportsResponse apiResponse;
+            GetAllScoutingReportsResponse apiResponse;
 
             var scoutingReports = await this.scoutingReportService.GetAllScoutingReportsAsync();
 
-            apiResponse = new GetScoutingReportsResponse
+            apiResponse = new GetAllScoutingReportsResponse
             {
                 ScoutingReports = scoutingReports,
                 Count = scoutingReports.Count,
