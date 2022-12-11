@@ -28,5 +28,11 @@ namespace API.Common.DTO
         /// </summary>
         [JsonProperty("email")]
         public string Email { get; set; } = null!;
+
+        /// <summary>
+        /// Gets or sets the scout ID.
+        /// </summary>
+        [JsonProperty("scoutId")]
+        public string ScoutId { get; set; } = null!;
     }
 }

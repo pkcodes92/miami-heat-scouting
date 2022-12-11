@@ -32,7 +32,10 @@ namespace API.Controllers
         /// <param name="telemetryClient">The telemetry client injection.</param>
         /// <param name="scoutingReportService">The scouting report service injection.</param>
         /// <param name="userService">The user service injection.</param>
-        public ScoutingReportController(TelemetryClient telemetryClient, IScoutingReportService scoutingReportService, IUserService userService)
+        public ScoutingReportController(
+            TelemetryClient telemetryClient,
+            IScoutingReportService scoutingReportService,
+            IUserService userService)
         {
             this.telemetryClient = telemetryClient;
             this.scoutingReportService = scoutingReportService;
@@ -123,7 +126,9 @@ namespace API.Controllers
         {
             var scout = await this.userService.GetUserAsync(scoutName);
 
-            return this.Ok(scout);
+            var scoutingReports = await this.scoutingReportService.GetScoutingReportsByScoutAsync(scout.ScoutId);
+
+            return this.Ok(scoutingReports);
         }
 
         private List<ValidationError> BuildValidationErrors(ValidationResult result)

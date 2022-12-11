@@ -41,6 +41,7 @@ namespace API.Services
                 Name = x.Name,
                 Email = x.Email,
                 IsScout = x.ActiveFlag,
+                ScoutId = x.AzureAdUserId,
             }).ToList();
         }
 
@@ -58,6 +59,7 @@ namespace API.Services
                 Name = name,
                 Email = dbUser.Email,
                 IsScout = dbUser.ActiveFlag,
+                ScoutId = dbUser.AzureAdUserId,
             };
 
             return userToReturn;

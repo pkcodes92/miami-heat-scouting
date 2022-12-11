@@ -37,5 +37,12 @@ namespace API.Data.Repository.Interfaces
         /// </summary>
         /// <returns>A list of the type <see cref="ScoutingReport"/>.</returns>
         Task<List<ScoutingReport>> GetAllScoutingReportsAsync();
+
+        /// <summary>
+        /// Retrieves the scouting reports by the scout that created them.
+        /// </summary>
+        /// <param name="scoutId">The scout which created the scouting report.</param>
+        /// <returns>A list of scouting reports.</returns>
+        Task<List<ScoutingReport>> GetScoutingReportsByScoutAsync(string scoutId);
     }
 }

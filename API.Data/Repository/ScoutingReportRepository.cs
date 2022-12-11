@@ -68,5 +68,16 @@ namespace API.Data.Repository
             var results = await this.scoutContext.ScoutingReports.ToListAsync();
             return results!;
         }
+
+        /// <summary>
+        /// Retrieves all of the scouting reports that a scout has created.
+        /// </summary>
+        /// <param name="scoutId">The ID of the scout.</param>
+        /// <returns>A list of scouting reports.</returns>
+        public async Task<List<ScoutingReport>> GetScoutingReportsByScoutAsync(string scoutId)
+        {
+            var results = await this.scoutContext.ScoutingReports.Where(x => x.ScoutId == scoutId).ToListAsync();
+            return results!;
+        }
     }
 }

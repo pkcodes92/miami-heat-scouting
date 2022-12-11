@@ -91,5 +91,27 @@ namespace API.Services
                 Shooting = x.Shooting,
             }).ToList();
         }
+
+        /// <summary>
+        /// Retrieves all of the scouting reports by scout ID.
+        /// </summary>
+        /// <param name="scoutId">The scout ID.</param>
+        /// <returns>A list of scouting reports by scout ID.</returns>
+        public async Task<List<ScoutingReport>> GetScoutingReportsByScoutAsync(string scoutId)
+        {
+            this.telemetryClient.TrackTrace($"Getting all the scouting reports belonging to: {scoutId}");
+
+            var dbScoutingReports = await this.scoutingReportRepository.GetScoutingReportsByScoutAsync(scoutId);
+
+            return dbScoutingReports.Select(x => new ScoutingReport
+            {
+                Assist = x.Assist,
+                Comments = x.Comments,
+                Defense = x.Defense,
+                IsActive = (bool)x.IsCurrent!,
+                ScoutId = x.ScoutId,
+                Shooting = x.Shooting,
+            }).ToList();
+        }
     }
 }
