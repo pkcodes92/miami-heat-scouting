@@ -13,7 +13,7 @@ namespace API.Data.Repository
     /// </summary>
     public class PlayerRepository : IPlayerRepository
     {
-        private readonly ScoutContext scoutCountext;
+        private readonly ScoutContext scoutContext;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerRepository"/> class.
@@ -21,7 +21,7 @@ namespace API.Data.Repository
         /// <param name="scoutCountext">The database injection.</param>
         public PlayerRepository(ScoutContext scoutCountext)
         {
-            this.scoutCountext = scoutCountext;
+            this.scoutContext = scoutCountext;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace API.Data.Repository
         /// <returns>A unit of execution which contains the <see cref="Player"/>.</returns>
         public async Task<Player> GetPlayerByFirstAndLastNameAsync(string firstName, string lastName)
         {
-            var result = await this.scoutCountext.Players.FirstOrDefaultAsync(x => x.FirstName == firstName && x.LastName == lastName);
+            var result = await this.scoutContext.Players.FirstOrDefaultAsync(x => x.FirstName == firstName && x.LastName == lastName);
             return result!;
         }
 
@@ -42,8 +42,19 @@ namespace API.Data.Repository
         /// <returns>A list of type <see cref="Player"/>.</returns>
         public async Task<List<Player>> GetAllPlayersAsync()
         {
-            var result = await this.scoutCountext.Players.ToListAsync();
+            var result = await this.scoutContext.Players.ToListAsync();
             return result;
+        }
+
+        /// <summary>
+        /// Retrieves a single player by the primary key.
+        /// </summary>
+        /// <param name="playerKey">The primary key of the player entity.</param>
+        /// <returns>A single player.</returns>
+        public async Task<Player> GetPlayerByKeyAsync(int playerKey)
+        {
+            var result = await this.scoutContext.Players.FirstOrDefaultAsync(x => x.PlayerKey == playerKey);
+            return result!;
         }
     }
 }

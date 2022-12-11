@@ -79,5 +79,28 @@ namespace API.Data.Repository
             var results = await this.scoutContext.ScoutingReports.Where(x => x.ScoutId == scoutId).ToListAsync();
             return results!;
         }
+
+        /// <summary>
+        /// Retrieves the grouped scouting reports by the scout ID.
+        /// </summary>
+        /// <param name="scoutId">The scout ID to retrieve the necessary reports.</param>
+        /// <returns>A grouping result of all the scouting reports.</returns>
+        public async Task<IEnumerable<IGrouping<int, ScoutingReport>>> GetGroupedScoutingReportsAsync(string scoutId)
+        {
+            var results = await this.scoutContext.ScoutingReports.Where(x => x.ScoutId == scoutId).GroupBy(x => x.TeamKey).ToListAsync();
+            return results!;
+        }
+
+        /// <summary>
+        /// Retrieves the scouting reports by the player and team primary keys.
+        /// </summary>
+        /// <param name="teamKey">The team primary key.</param>
+        /// <param name="playerKey">The player primary key.</param>
+        /// <returns>A list of scouting reports.</returns>
+        public async Task<List<ScoutingReport>> GetScoutingReportByPlayerAndTeamAsync(int teamKey, int playerKey)
+        {
+            var results = await this.scoutContext.ScoutingReports.Where(x => x.TeamKey == teamKey && x.PlayerKey == playerKey).ToListAsync();
+            return results!;
+        }
     }
 }

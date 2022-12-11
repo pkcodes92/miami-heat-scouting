@@ -126,7 +126,7 @@ namespace API.Controllers
         {
             var scout = await this.userService.GetUserAsync(scoutName);
 
-            var scoutingReports = await this.scoutingReportService.GetScoutingReportsByScoutAsync(scout.ScoutId);
+            var scoutingReports = await this.scoutingReportService.GetGroupedScoutingReportsByScoutAsync(scout.ScoutId);
 
             return this.Ok(scoutingReports);
         }

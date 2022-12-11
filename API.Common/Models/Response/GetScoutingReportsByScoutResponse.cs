@@ -13,9 +13,9 @@ namespace API.Common.Models.Response
     public class GetScoutingReportsByScoutResponse : ApiResponse
     {
         /// <summary>
-        /// Gets or sets the scout.
+        /// Gets or sets the necessary results.
         /// </summary>
-        [JsonProperty("scout")]
-        public User Scout { get; set; } = null!;
+        [JsonProperty("results")]
+        public List<GroupScoutingResult> Results { get; set; } = null!;
     }
 }

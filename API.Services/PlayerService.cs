@@ -63,5 +63,27 @@ namespace API.Services
 
             return playerToReturn;
         }
+
+        /// <summary>
+        /// Retrieves a single player by the primary key.
+        /// </summary>
+        /// <param name="playerKey">The primary key of the player.</param>
+        /// <returns>A unit of execution that contains the type of <see cref="Player"/>.</returns>
+        public async Task<Player> GetPlayerByKeyAsync(int playerKey)
+        {
+            Player playerToReturn;
+
+            var dbPlayer = await this.playerRepository.GetPlayerByKeyAsync(playerKey);
+
+            playerToReturn = new Player
+            {
+                FirstName = dbPlayer.FirstName,
+                LastName = dbPlayer.LastName,
+                BirthDate = (DateTime)dbPlayer.BirthDate!,
+                PlayerId = dbPlayer.PlayerKey,
+            };
+
+            return playerToReturn;
+        }
     }
 }

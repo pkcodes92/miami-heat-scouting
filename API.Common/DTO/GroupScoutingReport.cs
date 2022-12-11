@@ -1,4 +1,4 @@
-﻿// <copyright file="ScoutingReport.cs" company="Miami Heat">
+﻿// <copyright file="GroupScoutingReport.cs" company="Miami Heat">
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 
@@ -9,13 +9,19 @@ namespace API.Common.DTO
     /// <summary>
     /// This class will get the necessary scouting report.
     /// </summary>
-    public class ScoutingReport
+    public class GroupScoutingReport
     {
         /// <summary>
         /// Gets or sets the scout ID.
         /// </summary>
         [JsonProperty("scoutId")]
         public string ScoutId { get; set; } = null!;
+
+        /// <summary>
+        /// Gets or sets when the scouting report is created.
+        /// </summary>
+        [JsonProperty("createdDateTime")]
+        public DateTime? CreatedDateTime { get; set; }
 
         /// <summary>
         /// Gets or sets the assist rating.
@@ -52,14 +58,5 @@ namespace API.Common.DTO
         /// </summary>
         [JsonProperty("isActive")]
         public bool IsActive { get; set; }
-
-        [JsonProperty("createdDateTime")]
-        public DateTime? CreatedDateTime { get; set; }
-
-        [JsonProperty("playerKey")]
-        public int PlayerKey { get; set; }
-
-        [JsonProperty("teamKey")]
-        public int TeamKey { get; set; }
     }
 }
