@@ -77,6 +77,7 @@ namespace API.Controllers
                     ScoutingReportId = scoutingReportId,
                     Success = true,
                     ValidationErrors = null!,
+                    Count = 1,
                 };
             }
             catch (Exception ex)
@@ -124,11 +125,35 @@ namespace API.Controllers
         [HttpGet("GetScoutingReports/{scoutName}")]
         public async Task<ActionResult> GetScoutingReportsByScoutAsync(string scoutName)
         {
-            var scout = await this.userService.GetUserAsync(scoutName);
+            GetScoutingReportsByScoutResponse apiResponse;
 
-            var scoutingReports = await this.scoutingReportService.GetGroupedScoutingReportsByScoutAsync(scout.ScoutId);
+            try
+            {
+                var scout = await this.userService.GetUserAsync(scoutName);
 
-            return this.Ok(scoutingReports);
+                var scoutingReports = await this.scoutingReportService.GetGroupedScoutingReportsByScoutAsync(scout.ScoutId);
+
+                apiResponse = new GetScoutingReportsByScoutResponse
+                {
+                    Results = scoutingReports,
+                    Count = scoutingReports.Count,
+                    Success = true,
+                    ValidationErrors = null!,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.telemetryClient.TrackException(ex);
+                apiResponse = new GetScoutingReportsByScoutResponse
+                {
+                    ValidationErrors = null!,
+                    Count = 0,
+                    Success = false,
+                    Results = null!,
+                };
+            }
+
+            return this.Ok(apiResponse);
         }
 
         private List<ValidationError> BuildValidationErrors(ValidationResult result)
