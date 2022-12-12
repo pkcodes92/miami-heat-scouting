@@ -1,4 +1,4 @@
-﻿// <copyright file="GetScoutingReportsResponse.cs" company="Miami Heat">
+﻿// <copyright file="GetAllScoutingReportsResponse.cs" company="Miami Heat">
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 
@@ -10,7 +10,7 @@ namespace API.Common.Models.Response
     /// <summary>
     /// This class represents the response for getting all the scouting reports accordingly.
     /// </summary>
-    public class GetScoutingReportsResponse : ApiResponse
+    public class GetAllScoutingReportsResponse : ApiResponse
     {
         /// <summary>
         /// Gets or sets the list of scouting reports.

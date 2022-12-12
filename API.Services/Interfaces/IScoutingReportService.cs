@@ -8,7 +8,7 @@ namespace API.Services.Interfaces
     using API.Common.Models.Input;
 
     /// <summary>
-    /// This interface will contain the necessary methods to perform CRUD operations on the <see cref="ScoutingReport"/> entity.
+    /// This interface will contain the necessary methods to perform CRUD operations on the <see cref="GroupScoutingReport"/> entity.
     /// </summary>
     public interface IScoutingReportService
     {
@@ -24,5 +24,12 @@ namespace API.Services.Interfaces
         /// </summary>
         /// <returns>A list of all the scouting reports.</returns>
         Task<List<ScoutingReport>> GetAllScoutingReportsAsync();
+
+        /// <summary>
+        /// Retrieves the scouting reports by scout.
+        /// </summary>
+        /// <param name="scoutId">The scout key/ID.</param>
+        /// <returns>A list of the scouting reports by scout.</returns>
+        Task<List<GroupScoutingResult>> GetGroupedScoutingReportsByScoutAsync(string scoutId);
     }
 }

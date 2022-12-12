@@ -12,10 +12,16 @@ namespace API.Data.Repository.Interfaces
     public interface IUserRepository
     {
         /// <summary>
-        /// This method will allow for the user to be retrieved by their name.
+        /// Retrieves a user by the name.
         /// </summary>
         /// <param name="name">The name of the user.</param>
         /// <returns>A single user from the database.</returns>
         Task<User> GetUserByNameAsync(string name);
+
+        /// <summary>
+        /// Retrieves all of the users from the database.
+        /// </summary>
+        /// <returns>A list of the users.</returns>
+        Task<List<User>> GetAllUsersAsync();
     }
 }

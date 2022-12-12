@@ -23,6 +23,7 @@ namespace API.Controllers
     {
         private readonly TelemetryClient telemetryClient;
         private readonly IScoutingReportService scoutingReportService;
+        private readonly IUserService userService;
         private readonly IncomingScoutingReportValidator validator = new IncomingScoutingReportValidator();
 
         /// <summary>
@@ -30,10 +31,15 @@ namespace API.Controllers
         /// </summary>
         /// <param name="telemetryClient">The telemetry client injection.</param>
         /// <param name="scoutingReportService">The scouting report service injection.</param>
-        public ScoutingReportController(TelemetryClient telemetryClient, IScoutingReportService scoutingReportService)
+        /// <param name="userService">The user service injection.</param>
+        public ScoutingReportController(
+            TelemetryClient telemetryClient,
+            IScoutingReportService scoutingReportService,
+            IUserService userService)
         {
             this.telemetryClient = telemetryClient;
             this.scoutingReportService = scoutingReportService;
+            this.userService = userService;
         }
 
         /// <summary>
@@ -41,8 +47,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="newScoutingReport">The information required to add the new scouting report to the database.</param>
         /// <returns>A unit of execution that contains an action result.</returns>
-        [HttpPost]
-        [Route("AddNewScoutingReport")]
+        [HttpPost("AddNewScoutingReport")]
         public async Task<ActionResult> AddNewScoutingReportAsync(IncomingScoutingReport newScoutingReport)
         {
             InsertScoutingReportResponse apiResponse;
@@ -72,6 +77,7 @@ namespace API.Controllers
                     ScoutingReportId = scoutingReportId,
                     Success = true,
                     ValidationErrors = null!,
+                    Count = 1,
                 };
             }
             catch (Exception ex)
@@ -93,21 +99,59 @@ namespace API.Controllers
         /// This method will be returning all of the scouting reports in the database.
         /// </summary>
         /// <returns>A unit of execution that contains an HTTP result.</returns>
-        [HttpGet]
-        [Route("GetAllScoutingReports")]
+        [HttpGet("GetAllScoutingReports")]
         public async Task<ActionResult> GetAllScoutingReportsAsync()
         {
-            GetScoutingReportsResponse apiResponse;
+            GetAllScoutingReportsResponse apiResponse;
 
             var scoutingReports = await this.scoutingReportService.GetAllScoutingReportsAsync();
 
-            apiResponse = new GetScoutingReportsResponse
+            apiResponse = new GetAllScoutingReportsResponse
             {
                 ScoutingReports = scoutingReports,
                 Count = scoutingReports.Count,
                 Success = scoutingReports.Count > 0,
                 ValidationErrors = null!,
             };
+
+            return this.Ok(apiResponse);
+        }
+
+        /// <summary>
+        /// This method gets the scouting reports that were done by the name of the scout.
+        /// </summary>
+        /// <param name="scoutName">The name of the scout.</param>
+        /// <returns>A unit of execution that contains an HTTP result.</returns>
+        [HttpGet("GetScoutingReports/{scoutName}")]
+        public async Task<ActionResult> GetScoutingReportsByScoutAsync(string scoutName)
+        {
+            GetScoutingReportsByScoutResponse apiResponse;
+
+            try
+            {
+                var scout = await this.userService.GetUserAsync(scoutName);
+
+                var scoutingReports = await this.scoutingReportService.GetGroupedScoutingReportsByScoutAsync(scout.ScoutId);
+
+                apiResponse = new GetScoutingReportsByScoutResponse
+                {
+                    Results = scoutingReports,
+                    Count = scoutingReports.Count,
+                    Success = true,
+                    ValidationErrors = null!,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.telemetryClient.TrackException(ex);
+                apiResponse = new GetScoutingReportsByScoutResponse
+                {
+                    ValidationErrors = null!,
+                    Count = 0,
+                    Success = false,
+                    Results = null!,
+                };
+            }
 
             return this.Ok(apiResponse);
         }

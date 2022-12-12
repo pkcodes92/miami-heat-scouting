@@ -24,5 +24,12 @@ namespace API.Services.Interfaces
         /// </summary>
         /// <returns>A list of type <see cref="Player"/>.</returns>
         Task<List<Player>> GetAllPlayersAsync();
+
+        /// <summary>
+        /// Retrieves a single player.
+        /// </summary>
+        /// <param name="playerKey">The primary key of the player.</param>
+        /// <returns>A single result of the type <see cref="Player"/>.</returns>
+        Task<Player> GetPlayerByKeyAsync(int playerKey);
     }
 }
