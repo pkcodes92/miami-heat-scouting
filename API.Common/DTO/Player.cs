@@ -2,6 +2,8 @@
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 
+#nullable disable
+
 namespace API.Common.DTO
 {
     /// <summary>
@@ -17,12 +19,12 @@ namespace API.Common.DTO
         /// <summary>
         /// Gets or sets the first name of the player.
         /// </summary>
-        public string FirstName { get; set; } = null!;
+        public string FirstName { get; set; }
 
         /// <summary>
         /// Gets or sets the last name of the player.
         /// </summary>
-        public string LastName { get; set; } = null!;
+        public string LastName { get; set; }
 
         /// <summary>
         /// Gets or sets the birth date of the player.

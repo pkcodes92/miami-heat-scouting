@@ -44,5 +44,12 @@ namespace API.Data.Repository.Interfaces
         /// </summary>
         /// <returns>A list of type <see cref="Team"/>.</returns>
         Task<List<Team>> GetAllActiveTeamsAsync();
+
+        /// <summary>
+        /// Retrieves all the teams which are part of a league.
+        /// </summary>
+        /// <param name="leagueId">The primary key of the league entity.</param>
+        /// <returns>A list of teams that belong to a league.</returns>
+        Task<List<Team>> GetTeamsByLeagueAsync(int leagueId);
     }
 }

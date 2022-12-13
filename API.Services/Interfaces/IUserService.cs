@@ -18,6 +18,12 @@ namespace API.Services.Interfaces
         Task<List<User>> GetAllUsersAsync();
 
         /// <summary>
+        /// This method definition gets all of the active users from the database.
+        /// </summary>
+        /// <returns>A list of the active users or scouts.</returns>
+        Task<List<User>> GetAllActiveUsersAsync();
+
+        /// <summary>
         /// Gets the user based on the name.
         /// </summary>
         /// <param name="name">The name of the user.</param>

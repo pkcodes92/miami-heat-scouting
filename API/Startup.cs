@@ -84,12 +84,14 @@ namespace API
             services.AddTransient<IPlayerRepository, PlayerRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ITeamPlayerRepository, TeamPlayerRepository>();
+            services.AddTransient<ILeagueRepository, LeagueRepository>();
 
             services.AddTransient<ITeamsService, TeamsService>();
             services.AddTransient<IScoutingReportService, ScoutingReportService>();
             services.AddTransient<ITeamPlayerService, TeamPlayerService>();
             services.AddTransient<IPlayerService, PlayerService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ILeagueService, LeagueService>();
         }
 
         /// <summary>

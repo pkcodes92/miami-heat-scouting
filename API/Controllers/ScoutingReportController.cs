@@ -104,15 +104,29 @@ namespace API.Controllers
         {
             GetAllScoutingReportsResponse apiResponse;
 
-            var scoutingReports = await this.scoutingReportService.GetAllScoutingReportsAsync();
-
-            apiResponse = new GetAllScoutingReportsResponse
+            try
             {
-                ScoutingReports = scoutingReports,
-                Count = scoutingReports.Count,
-                Success = scoutingReports.Count > 0,
-                ValidationErrors = null!,
-            };
+                var scoutingReports = await this.scoutingReportService.GetAllScoutingReportsAsync();
+
+                apiResponse = new GetAllScoutingReportsResponse
+                {
+                    ScoutingReports = scoutingReports,
+                    Count = scoutingReports.Count,
+                    Success = scoutingReports.Count > 0,
+                    ValidationErrors = null!,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.telemetryClient.TrackException(ex);
+                apiResponse = new GetAllScoutingReportsResponse
+                {
+                    Success = false,
+                    Count = 0,
+                    ValidationErrors = null!,
+                    ScoutingReports = null!,
+                };
+            }
 
             return this.Ok(apiResponse);
         }

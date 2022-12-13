@@ -42,15 +42,30 @@ namespace API.Controllers
             this.telemetryClient.TrackTrace("Getting all the active teams");
             GetTeamsResponse apiResponse;
 
-            var teams = await this.teamsService.GetActiveTeamsAsync();
-
-            apiResponse = new GetTeamsResponse
+            try
             {
-                Count = teams.Count > 0 ? teams.Count : 0,
-                Success = teams.Count > 0,
-                Teams = teams,
-                ValidationErrors = null!,
-            };
+                var teams = await this.teamsService.GetActiveTeamsAsync();
+
+                apiResponse = new GetTeamsResponse
+                {
+                    Count = teams.Count > 0 ? teams.Count : 0,
+                    Success = teams.Count > 0,
+                    Teams = teams,
+                    ValidationErrors = null!,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.telemetryClient.TrackException(ex);
+
+                apiResponse = new GetTeamsResponse
+                {
+                    Teams = null!,
+                    Count = 0,
+                    Success = false,
+                    ValidationErrors = null!,
+                };
+            }
 
             return this.Ok(apiResponse);
         }
@@ -66,15 +81,29 @@ namespace API.Controllers
             this.telemetryClient.TrackTrace("Getting all the teams");
             GetTeamsResponse apiResponse;
 
-            var teams = await this.teamsService.GetAllTeamsAsync();
-
-            apiResponse = new GetTeamsResponse
+            try
             {
-                Count = teams.Count > 0 ? teams.Count : 0,
-                Success = teams.Count > 0,
-                Teams = teams,
-                ValidationErrors = null!,
-            };
+                var teams = await this.teamsService.GetAllTeamsAsync();
+
+                apiResponse = new GetTeamsResponse
+                {
+                    Count = teams.Count > 0 ? teams.Count : 0,
+                    Success = teams.Count > 0,
+                    Teams = teams,
+                    ValidationErrors = null!,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.telemetryClient.TrackException(ex);
+                apiResponse = new GetTeamsResponse
+                {
+                    Teams = null!,
+                    Count = 0,
+                    Success = false,
+                    ValidationErrors = null!,
+                };
+            }
 
             return this.Ok(apiResponse);
         }

@@ -2,6 +2,8 @@
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 
+#nullable disable
+
 namespace API.Common.DTO
 {
     /// <summary>
@@ -12,37 +14,37 @@ namespace API.Common.DTO
         /// <summary>
         /// Gets or sets the team nickname.
         /// </summary>
-        public string TeamNickname { get; set; } = null!;
+        public string TeamNickname { get; set; }
 
         /// <summary>
         /// Gets or sets the team name.
         /// </summary>
-        public string TeamName { get; set; } = null!;
+        public string TeamName { get; set; }
 
         /// <summary>
         /// Gets or sets the conference.
         /// </summary>
-        public string Conference { get; set; } = null!;
+        public string Conference { get; set; }
 
         /// <summary>
         /// Gets or sets the subconference.
         /// </summary>
-        public string Division { get; set; } = null!;
+        public string Division { get; set; }
 
         /// <summary>
         /// Gets or sets the coach name.
         /// </summary>
-        public string CoachName { get; set; } = null!;
+        public string CoachName { get; set; }
 
         /// <summary>
         /// Gets or sets the team city.
         /// </summary>
-        public string TeamCity { get; set; } = null!;
+        public string TeamCity { get; set; }
 
         /// <summary>
         /// Gets or sets the team country.
         /// </summary>
-        public string TeamCountry { get; set; } = null!;
+        public string TeamCountry { get; set; }
 
         /// <summary>
         /// Gets or sets the team key.

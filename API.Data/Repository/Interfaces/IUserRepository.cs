@@ -23,5 +23,11 @@ namespace API.Data.Repository.Interfaces
         /// </summary>
         /// <returns>A list of the users.</returns>
         Task<List<User>> GetAllUsersAsync();
+
+        /// <summary>
+        /// Retrieves all the active users.
+        /// </summary>
+        /// <returns>A list of all the active users.</returns>
+        Task<List<User>> GetAllActiveUsersAsync();
     }
 }

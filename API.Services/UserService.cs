@@ -46,6 +46,23 @@ namespace API.Services
         }
 
         /// <summary>
+        /// This method returns all the active users from the database.
+        /// </summary>
+        /// <returns>A list of the active users.</returns>
+        public async Task<List<User>> GetAllActiveUsersAsync()
+        {
+            var dbUsers = await this.userRepository.GetAllActiveUsersAsync();
+
+            return dbUsers.Select(x => new User
+            {
+                Email = x.Email,
+                IsScout = x.ActiveFlag,
+                Name = x.Name,
+                ScoutId = x.AzureAdUserId,
+            }).ToList();
+        }
+
+        /// <summary>
         /// This method returns a single user.
         /// </summary>
         /// <param name="name">The name of the user.</param>

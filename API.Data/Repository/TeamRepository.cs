@@ -79,5 +79,16 @@ namespace API.Data.Repository
             var result = team.TeamKey;
             return result!;
         }
+
+        /// <summary>
+        /// Retrieves a list of teams that belong to a particular league.
+        /// </summary>
+        /// <param name="leagueId">The league ID, or the league key (primary key) of the league entity.</param>
+        /// <returns>A list of teams that belong to a league.</returns>
+        public async Task<List<Team>> GetTeamsByLeagueAsync(int leagueId)
+        {
+            var results = await this.scoutContext.Teams.Where(x => x.LeagueKey == leagueId).ToListAsync();
+            return results;
+        }
     }
 }

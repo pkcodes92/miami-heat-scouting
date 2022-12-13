@@ -2,6 +2,8 @@
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 
+#nullable disable
+
 namespace API.Common.Models.Response
 {
     using API.Common.DTO;
@@ -16,6 +18,6 @@ namespace API.Common.Models.Response
         /// Gets or sets a list of players.
         /// </summary>
         [JsonProperty("players")]
-        public List<Player> Players { get; set; } = null!;
+        public List<Player> Players { get; set; }
     }
 }
