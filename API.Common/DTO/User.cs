@@ -2,6 +2,8 @@
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 
+#nullable disable
+
 namespace API.Common.DTO
 {
     using Newtonsoft.Json;
@@ -21,18 +23,18 @@ namespace API.Common.DTO
         /// Gets or sets the name of the user.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; set; } = null!;
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the email address.
         /// </summary>
         [JsonProperty("email")]
-        public string Email { get; set; } = null!;
+        public string Email { get; set; }
 
         /// <summary>
         /// Gets or sets the scout ID.
         /// </summary>
         [JsonProperty("scoutId")]
-        public string ScoutId { get; set; } = null!;
+        public string ScoutId { get; set; }
     }
 }

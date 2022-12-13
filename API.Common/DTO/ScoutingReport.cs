@@ -2,6 +2,8 @@
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 
+#nullable disable
+
 namespace API.Common.DTO
 {
     using Newtonsoft.Json;
@@ -15,7 +17,7 @@ namespace API.Common.DTO
         /// Gets or sets the scout ID.
         /// </summary>
         [JsonProperty("scoutId")]
-        public string ScoutId { get; set; } = null!;
+        public string ScoutId { get; set; }
 
         /// <summary>
         /// Gets or sets the assist rating.
@@ -45,7 +47,7 @@ namespace API.Common.DTO
         /// Gets or sets the comments.
         /// </summary>
         [JsonProperty("comments")]
-        public string Comments { get; set; } = null!;
+        public string Comments { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether if the scouting report is active.
@@ -53,12 +55,21 @@ namespace API.Common.DTO
         [JsonProperty("isActive")]
         public bool IsActive { get; set; }
 
+        /// <summary>
+        /// Gets or sets the date/time that the scouting report has been created.
+        /// </summary>
         [JsonProperty("createdDateTime")]
         public DateTime? CreatedDateTime { get; set; }
 
+        /// <summary>
+        /// Gets or sets the player key.
+        /// </summary>
         [JsonProperty("playerKey")]
         public int PlayerKey { get; set; }
 
+        /// <summary>
+        /// Gets or sets the team key.
+        /// </summary>
         [JsonProperty("teamKey")]
         public int TeamKey { get; set; }
     }
