@@ -65,5 +65,41 @@ namespace API.Controllers
 
             return this.Ok(apiResponse);
         }
+
+        /// <summary>
+        /// This method gets all the active scouts (users) from the database.
+        /// </summary>
+        /// <returns>A list of all the active scouts.</returns>
+        [HttpGet("GetAllActiveScouts")]
+        public async Task<ActionResult> GetAllActiveScoutsAsync()
+        {
+            GetAllUsersResponse apiResponse;
+
+            try
+            {
+                var users = await this.userService.GetAllActiveUsersAsync();
+
+                apiResponse = new GetAllUsersResponse
+                {
+                    Count = users.Count,
+                    Success = true,
+                    Users = users,
+                    ValidationErrors = null!,
+                };
+            }
+            catch (Exception ex)
+            {
+                this.telemetryClient.TrackException(ex);
+                apiResponse = new GetAllUsersResponse
+                {
+                    Users = null!,
+                    Count = 0,
+                    Success = false,
+                    ValidationErrors = null!,
+                };
+            }
+
+            return this.Ok(apiResponse);
+        }
     }
 }

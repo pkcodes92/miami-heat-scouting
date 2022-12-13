@@ -16,5 +16,12 @@ namespace API.Services.Interfaces
         /// </summary>
         /// <returns>A list of the leagues in the database.</returns>
         Task<List<League>> GetAllLeaguesAsync();
+
+        /// <summary>
+        /// Gets all of the teams filtered by the league.
+        /// </summary>
+        /// <param name="leagueKey">The league primary key.</param>
+        /// <returns>A list of teams that belong to a league.</returns>
+        Task<List<Team>> GetTeamsByLeagueAsync(int leagueKey);
     }
 }

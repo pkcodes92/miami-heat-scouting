@@ -44,5 +44,15 @@ namespace API.Data.Repository
             var result = await this.scoutContext.Users.ToListAsync();
             return result;
         }
+
+        /// <summary>
+        /// Retrieves all the active users from the database.
+        /// </summary>
+        /// <returns>A list of the active users.</returns>
+        public async Task<List<User>> GetAllActiveUsersAsync()
+        {
+            var results = await this.scoutContext.Users.Where(x => x.ActiveFlag == true).ToListAsync();
+            return results;
+        }
     }
 }
