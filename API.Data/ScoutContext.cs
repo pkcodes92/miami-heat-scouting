@@ -311,7 +311,7 @@ namespace API.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // do nothing??
+                  // No logic as such for the time being
             }
         }
 
