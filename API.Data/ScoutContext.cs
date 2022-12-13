@@ -2,6 +2,8 @@
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 
+#nullable disable
+
 namespace API.Data
 {
     using API.Data.Entities;
@@ -31,32 +33,32 @@ namespace API.Data
         /// <summary>
         /// Gets or sets the league entities.
         /// </summary>
-        public virtual DbSet<League> Leagues { get; set; } = null!;
+        public virtual DbSet<League> Leagues { get; set; }
 
         /// <summary>
         /// Gets or sets the team player entities.
         /// </summary>
-        public virtual DbSet<TeamPlayer> TeamPlayers { get; set; } = null!;
+        public virtual DbSet<TeamPlayer> TeamPlayers { get; set; }
 
         /// <summary>
         /// Gets or sets the team entities.
         /// </summary>
-        public virtual DbSet<Team> Teams { get; set; } = null!;
+        public virtual DbSet<Team> Teams { get; set; }
 
         /// <summary>
         /// Gets or sets the player entities.
         /// </summary>
-        public virtual DbSet<Player> Players { get; set; } = null!;
+        public virtual DbSet<Player> Players { get; set; }
 
         /// <summary>
         /// Gets or sets the scout entities.
         /// </summary>
-        public virtual DbSet<User> Users { get; set; } = null!;
+        public virtual DbSet<User> Users { get; set; }
 
         /// <summary>
         /// Gets or sets the scouting report entities.
         /// </summary>
-        public virtual DbSet<ScoutingReport> ScoutingReports { get; set; } = null!;
+        public virtual DbSet<ScoutingReport> ScoutingReports { get; set; }
 
         /// <summary>
         /// This method will be able to bind the database schema accordingly.
