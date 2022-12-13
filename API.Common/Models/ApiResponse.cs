@@ -2,6 +2,8 @@
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 
+#nullable disable
+
 namespace API.Common.Models
 {
     using Newtonsoft.Json;
@@ -21,7 +23,7 @@ namespace API.Common.Models
         /// Gets or sets the necessary validation errors.
         /// </summary>
         [JsonProperty("errors")]
-        public List<ValidationError> ValidationErrors { get; set; } = null!;
+        public List<ValidationError> ValidationErrors { get; set; }
 
         /// <summary>
         /// Gets or sets the count.

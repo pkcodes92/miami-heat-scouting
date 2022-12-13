@@ -2,6 +2,8 @@
 // Copyright (c) Miami Heat. All rights reserved.
 // </copyright>
 
+#nullable disable
+
 namespace API.Common.Models.Input
 {
     using Newtonsoft.Json;
@@ -15,31 +17,31 @@ namespace API.Common.Models.Input
         /// Gets or sets the name of the scout.
         /// </summary>
         [JsonProperty("scoutName")]
-        public string ScoutName { get; set; } = null!;
+        public string ScoutName { get; set; }
 
         /// <summary>
         /// Gets or sets the team city.
         /// </summary>
         [JsonProperty("teamCity")]
-        public string TeamCity { get; set; } = null!;
+        public string TeamCity { get; set; }
 
         /// <summary>
         /// Gets or sets the team name.
         /// </summary>
         [JsonProperty("teamName")]
-        public string TeamName { get; set; } = null!;
+        public string TeamName { get; set; }
 
         /// <summary>
         /// Gets or sets the player first name.
         /// </summary>
         [JsonProperty("playerFirstName")]
-        public string PlayerFirstName { get; set; } = null!;
+        public string PlayerFirstName { get; set; }
 
         /// <summary>
         /// Gets or sets the player last name.
         /// </summary>
         [JsonProperty("playerLastName")]
-        public string PlayerLastName { get; set; } = null!;
+        public string PlayerLastName { get; set; }
 
         /// <summary>
         /// Gets or sets the shooting rating.
@@ -69,6 +71,6 @@ namespace API.Common.Models.Input
         /// Gets or sets the necessary comments.
         /// </summary>
         [JsonProperty("comments")]
-        public string Comments { get; set; } = null!;
+        public string Comments { get; set; }
     }
 }
